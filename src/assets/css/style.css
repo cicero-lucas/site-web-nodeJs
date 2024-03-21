@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fontTitulo);
+}
+
+:root{
+    --principal: #0092FA;
+    --secundario: #fee000;
+    --titulosecudario:#4F97CD;
+    --texto:#83CCCD;
+    --fontTitulo:"Roboto Flex", "sans-serif";
+}
+
+#logo{
+    background: var(--principal);
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 20vh;
+}
+
+#logo #imgLogo{
+    flex: 30%;
+    height: 100%;
+    margin: 1% 2% 2% 8%;
+    overflow: hidden;
+}
+
+
+#imgLogo>img{
+    width: 40%;
+    height: 80%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+#logo nav{
+    flex: 50%;
+    height: 50px;
+    margin: 2% 8% 2% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#logo>nav a{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-family:var(--fontTitulo);
+    font-size: 16px; 
+    cursor: pointer;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.144);
+}
+
+#logo>nav>a:hover{
+    color: var(--secundario);
+    border-bottom: 2px solid var(--secundario);
+    transition: 1s ease-in-out;
+}
+
+main{
+    margin: 3rem auto;
+    max-width: 1400px;
+}
+
+section#caixaApresetacao{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 550px;
+}
+
+#imgApresetacao{
+    flex: 60%;
+    height: 100%;
+}
+#imgApresetacao>img{
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+    margin-left: -3rem;
+}
+#caixaTextoa{
+    flex:25%;
+    font-family: var(--fontTitulo);
+    margin: auto;
+    text-align: center;
+}
+#caixaTextoa{
+    margin: 0.2rem auto;
+    margin-left: -3rem;
+    padding: 0.2rem;
+    border: 2px solid var(--titulosecudario);
+    border-radius: 15px;
+    box-sizing: 1px 1px 1px rgba(0, 0, 0, 0.049);
+}
+#caixaTextoa> #textoAPres h2{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 2rem auto;
+    color: var(--titulosecudario);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.085);
+}
+#caixaTextoa> #textoAPres p{
+    margin: 0.2rem auto;
+    color: var(--titulosecudario);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.085);
+}
+#caixaTextoa> #btnApres button{
+   margin: 2rem auto;
+   background-color: var(--titulosecudario);
+   width: 160px;
+   height: 50px;
+   border: 1px solid var(--titulosecudario);
+   border-radius: 10px;
+   font-weight: 600;
+   color: white;
+   cursor: pointer;
+   transition: 1s ease-in-out;
+}
+#caixaTextoa> #btnApres button:hover{
+   background: none;
+   border: 1px solid var(--principal);
+   color: var(--principal);
+
+}
+
+#sobre{
+    margin: 4rem auto;
+    width: 96%;
+}
+
+.tituloSobre h3,h4,h5{
+    width: 96%;
+    margin: 2rem auto;
+    text-align: center;
+    font: bold 1.5rem Times New Roman;
+    background-color: var(--principal);
+    padding: 0.3rem;
+    border-radius: 10px;
+    color: white;
+    display: block;
+}
+#sobre #textoSobre p{
+    margin: 2rem auto;
+    text-align: justify;
+}
+
+#caixaInformacao{
+    margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.apServicos{
+    margin: 2rem auto;
+    width: 420px;
+    height: 100px;
+    border: 2px solid var(--principal);
+    border-radius: 10px;
+}
+
+#caixaDfrequentes{
+    width: 80%;
+    margin: 2rem auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#caixaImgd{
+    flex: 40%;
+    height: 400px;
+    background-color:var(--secundario);
+    border-radius: 10px;
+}
+#caixaImgd>img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+#caixaDuvidas{
+    flex: 50%;
+    margin: 2% 3%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.caixaPergunta{
+    width: 100%;
+    background-color: var(--principal);
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin: 0.5rem auto;
+    text-align: center;
+    cursor: pointer;
+    transition: 1s ease-in-out;
+    font-weight: 600;
+    color: white;
+}
+.caixaPergunta:hover{
+  background:var(--secundario);
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 0.323);
+
+}
+
+
+
+
+
+
