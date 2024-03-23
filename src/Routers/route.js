@@ -5,7 +5,7 @@ const Rotas = express.Router();
 
 try{
     Rotas.get('/',siteController.Home);
-    Rotas.get('/nossosprojetos',siteController.Home);
+    Rotas.get('/projetos',siteController.Projetos);
     Rotas.get("*",siteController.erro);
 
 }catch{

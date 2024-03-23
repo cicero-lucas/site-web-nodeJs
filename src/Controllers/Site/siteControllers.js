@@ -8,8 +8,8 @@ const Home = (req,res)=>{
     }
     );
 }
-const nossosProjetos = (req,res)=>{
-    return res.render('home',
+const Projetos = (req,res)=>{
+    return res.render('projeto',
     {
         layout:MASTEE_DIR,
         title:"MAtheus"
@@ -27,6 +27,6 @@ const erro= (req,res)=>{
 
 module.exports={
     Home,
-    nossosProjetos,
+    Projetos,
     erro
 }

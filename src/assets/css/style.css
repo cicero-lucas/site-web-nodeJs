@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
     margin: 0;
@@ -9,10 +10,10 @@
 
 :root{
     --principal: #0092FA;
-    --secundario: #fee000;
+    --secundario: #e7cd04;
     --titulosecudario:#4F97CD;
     --texto:#83CCCD;
-    --fontTitulo:"Roboto Flex", "sans-serif";
+    --fontTitulo: "Montserrat", sans-serif;
 }
 
 #logo{
@@ -20,16 +21,16 @@
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
-    height: 20vh;
+    height: 21vh;
+    position: relative;
 }
 
 #logo #imgLogo{
     flex: 30%;
-    height: 100%;
+    height: 98%;
     margin: 1% 2% 2% 8%;
     overflow: hidden;
 }
-
 
 #imgLogo>img{
     width: 40%;
@@ -47,7 +48,7 @@
     justify-content: space-around;
 }
 
-#logo>nav a{
+#logo>nav a ,#menuLink>a{
     color: white;
     padding: 10px;
     text-decoration: none;
@@ -55,6 +56,7 @@
     font-size: 16px; 
     cursor: pointer;
     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.144);
+    font-weight: 500;
 }
 
 #logo>nav>a:hover{
@@ -63,16 +65,73 @@
     transition: 1s ease-in-out;
 }
 
+/* menu moblile */
+
+#celular{
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    width: 200px;
+    overflow: hidden;
+    display: none;
+}
+
+#celular input[type="checkbox"]{
+    display: none;
+}
+
+#menuH{
+    float: right;
+    margin: 1rem;
+    
+}
+
+#menuH .homeIcone{
+    font-size: 38px;
+    color: white;
+ }
+
+#menuLink{
+    width: 300px;
+    margin: 3rem auto;
+    height: auto;
+    background-color: #e7cd04;
+    transition: 1s ease-in;
+    transform: translateX(200px);
+    padding: 1rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#menuLink > a{
+    display: block;
+    margin: 1rem;
+    padding: 0.2rem;
+}
+#menuLink > a:hover{
+    color: var(--principal);
+    border-bottom: 2px solid var(--principal);
+    transition: 1s ease-in-out;
+}
+
+#celular input[type="checkbox"]:checked ~ #menuLink{
+    transform: translateX(-1px);
+}
+
+/* main */
+
 main{
     margin: 3rem auto;
     max-width: 1400px;
 }
 
+/* apresetação */
+
 section#caixaApresetacao{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    height: 550px; 
     align-items: center;
-    height: 550px;
 }
 
 #imgApresetacao{
@@ -83,54 +142,66 @@ section#caixaApresetacao{
     width: 100%;
     height: 100%;
     object-fit:fill;
-    margin-left: -3rem;
+    margin-left: -5rem;
 }
 #caixaTextoa{
-    flex:25%;
+    flex:40%;
     font-family: var(--fontTitulo);
     margin: auto;
     text-align: center;
 }
-#caixaTextoa{
-    margin: 0.2rem auto;
-    margin-left: -3rem;
+#textoa{
+    width: 85%;
+    margin-right: 8rem;
     padding: 0.2rem;
-    border: 2px solid var(--titulosecudario);
+    border: 2px solid var(--principal);
     border-radius: 15px;
     box-sizing: 1px 1px 1px rgba(0, 0, 0, 0.049);
+    
 }
-#caixaTextoa> #textoAPres h2{
+#textoa> #textoAPres h2{
     font-family: 'Times New Roman', Times, serif;
-    margin: 2rem auto;
-    color: var(--titulosecudario);
+    margin: 1rem auto;
+    color: var(--principal);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.085);
+    font-size: 30px;
 }
-#caixaTextoa> #textoAPres p{
+
+#textoA{
+   width: 90%;
+   margin: auto;
+    
+}
+#textoA> p{
     margin: 0.2rem auto;
-    color: var(--titulosecudario);
+    text-align: justify;
+    font-size: 17px;
+    color: var(--principal);
+    font-weight: 500;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.085);
 }
-#caixaTextoa> #btnApres button{
+#btnApres button{
    margin: 2rem auto;
-   background-color: var(--titulosecudario);
+   background-color: var(--principal);
    width: 160px;
    height: 50px;
-   border: 1px solid var(--titulosecudario);
+   border: 1px solid var(--principal);
    border-radius: 10px;
-   font-weight: 600;
+   font-size: 16px;
+   font-weight: 500;
    color: white;
    cursor: pointer;
    transition: 1s ease-in-out;
 }
-#caixaTextoa> #btnApres button:hover{
+ #btnApres button:hover{
    background: none;
-   border: 1px solid var(--principal);
-   color: var(--principal);
+   border: 1px solid var(--titulosecudario);
+   color: var(--titulosecudario);
 
 }
 
 #sobre{
-    margin: 4rem auto;
+    margin: 2rem auto;
     width: 96%;
 }
 
@@ -145,9 +216,19 @@ section#caixaApresetacao{
     color: white;
     display: block;
 }
+
+#textoSobre{
+    width: 95%;
+    margin: auto;
+}
 #sobre #textoSobre p{
     margin: 2rem auto;
     text-align: justify;
+    font-size: 16px;
+}
+
+.primeiro{
+    text-indent: 3em;
 }
 
 #caixaInformacao{
@@ -159,11 +240,28 @@ section#caixaApresetacao{
 }
 
 .apServicos{
-    margin: 2rem auto;
-    width: 420px;
-    height: 100px;
-    border: 2px solid var(--principal);
+    margin: 2.5rem auto;
+    width: 500px;
+    height: 350px;
     border-radius: 10px;
+}
+.apServicos .tituloServico{
+    width: 80%;
+    padding: 0.6rem;
+    margin: 1rem auto;
+    background-color: #e7cd04;
+    border-radius: 10px;
+    text-align: center;
+    font: 600 18px arial;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.118);
+}
+.apServicos .descricaoServico{
+   margin: 1rem 2.5rem;
+   font-weight: 500;
+   text-align: justify;
+   line-height: 1.5;
+   font-size: 17px;
 }
 
 #caixaDfrequentes{
@@ -174,7 +272,7 @@ section#caixaApresetacao{
 }
 
 #caixaImgd{
-    flex: 40%;
+    flex: 50%;
     height: 400px;
     background-color:var(--secundario);
     border-radius: 10px;
@@ -185,7 +283,7 @@ section#caixaApresetacao{
     object-fit: fill;
 }
 #caixaDuvidas{
-    flex: 50%;
+    flex: 40%;
     margin: 2% 3%;
     display: flex;
     flex-direction: column;
@@ -202,6 +300,10 @@ section#caixaApresetacao{
     transition: 1s ease-in-out;
     font-weight: 600;
     color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0);
 }
 .caixaPergunta:hover{
   background:var(--secundario);
@@ -210,8 +312,192 @@ section#caixaApresetacao{
 
 }
 
+.caixaResposta p.resposta{
+    height: 100px;
+    font-weight: 600;
+    text-align: justify;
+    margin: 0.2rem 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    line-height: 1.2;
+    opacity: 0;
+    display: none;
+    transition: 1s all;
+}
+
+
+div#btnDfrequentes>button{
+    margin: 2rem auto;
+    background-color: var(--secundario);
+    width: 230px;
+    height: 60px;
+    border: 1px solid var(--secundario);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s ease-in-out;
+    display: block;
+    font: 600 16px arial;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.118);
+}
 
 
 
+div#btnDfrequentes>button:hover{
+   background: none;
+   color: var(--secundario);
+   
+}
 
+/* footer */
+
+div#apEmpresa{
+    background-color: var(--principal);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+div#imgFooter{
+    flex: 20%;
+    height: 100px;
+    margin: 2% 3%;
+}
+
+div#imgFooter img{
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+}
+
+#navFooter{
+    flex: 20%;
+    margin: 2% 8%;
+}
+#navf{
+    width: 130px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+#msg{
+    display: block;
+    width: 100%;
+    margin: 2rem;
+    text-align: center;
+    color: white;
+}
+
+#navf a{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-family:var(--fontTitulo);
+    font-weight: 600;
+    font-size: 16px; 
+    cursor: pointer;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.144);
+}
+
+#navf>a:hover{
+    color: var(--secundario);
+    border-bottom: 2px solid var(--secundario);
+    transition: 1s ease-in-out;
+
+}
+
+#imgfooter{
+    flex: 20%;
+    height: 100px;
+    margin: 2% 8%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#imgfooter img{
+    width: 35px;
+    height: 35px;
+    object-fit: fill;
+
+}
+
+@media screen and (max-width:420px) {
+    .apServicos{
+        height: auto;
+    }
+   
+    
+}
+@media screen and (min-width:840px) and (max-width:1200px)  {
+
+    #imgApresetacao{
+        flex: 55%;
+        height: 100%;
+    }
+  
+    #caixaTextoa{
+        flex:45%;
+        font-family: var(--fontTitulo);
+        margin: auto;
+        text-align: center;
+    }
+    #textoa{
+        width: 100%;
+        padding: 0.2rem;
+        border: 2px solid var(--principal);
+        border-radius: 15px;
+        box-sizing: 1px 1px 1px rgba(0, 0, 0, 0.049);
+        
+    }
+   
+    
+}
+
+
+@media screen and (max-width:840px){
+
+    #logo nav{
+        display: none;
+    }
+
+    #celular{
+        display: block;
+    }
+    
+    main{
+        margin: 3rem auto;
+        max-width: 100%;
+
+    }
+
+    section#caixaApresetacao{
+        display: block;
+        height: auto;
+        margin: 2rem auto;
+    }
+
+    #imgApresetacao{
+        display: block;
+        width: 100%;
+        margin: auto;
+        text-align: center
+    }
+    #imgApresetacao img{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+
+    #caixaTextoa #textoa{
+        display: block;
+        width: 80%;
+        margin: 1rem auto;
+    
+    }
+
+    
+}
 
