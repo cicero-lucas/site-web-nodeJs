@@ -12,7 +12,15 @@ const Projetos = (req,res)=>{
     return res.render('projeto',
     {
         layout:MASTEE_DIR,
-        title:"MAtheus"
+        title:"M2"
+    }
+    );
+}
+const Contato = (req,res)=>{
+    return res.render('contato',
+    {
+        layout:MASTEE_DIR,
+        title:"M2"
     }
     );
 }
@@ -27,6 +35,7 @@ const erro= (req,res)=>{
 
 module.exports={
     Home,
+    Contato,
     Projetos,
     erro
 }

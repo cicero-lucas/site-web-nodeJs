@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: var(--fontTitulo);
+    scroll-behavior: smooth;
 }
 
 :root{
@@ -312,6 +313,17 @@ section#caixaApresetacao{
 
 }
 
+.caixaFechada{
+    opacity: 0;
+    display: none;
+    transition: 1s ease-in-out;
+}
+.caixaAberta{
+    display: block;
+    transition: 1s ease-in-out;
+    opacity: 1;
+}
+
 .caixaResposta p.resposta{
     height: 100px;
     font-weight: 600;
@@ -320,9 +332,7 @@ section#caixaApresetacao{
     padding: 1rem;
     border-radius: 5px;
     line-height: 1.2;
-    opacity: 0;
-    display: none;
-    transition: 1s all;
+   
 }
 
 
