@@ -3,7 +3,59 @@
         <img src="img/projeto.png" alt="">
     </div>
     <div id="apProjetoTexto">
-        <h6>Veja o nosso Ultimos Projetos</h6>
+        <h6>Veja o nosso Ultimos Projetos!</h6>
+        
     </div>
+
+
 </section>
 
+
+<section id="projeto">
+    <div id="meusProjeto">
+        <div id="caixaImg">
+            <img src="server/img/web.png" alt="img">
+        </div>
+        <div id="caixaTitulo">
+            <p id="titulo">Projeto web</p>
+        </div>
+        <div id="caixaDescricao">
+            <p id="descricao">Desenvolvimento web é o processo de criar e manter websites e aplicativos web. Isso inclui planejamento, design, codificação, integração e teste. No front-end, trabalhamos na interface do usuário, enquanto no back-end lidamos com a lógica e funcionalidade do site. Após o teste e a implantação, a manutenção contínua é essencial para garantir o desempenho e a segurança do site.</p>
+        </div>
+    </div>
+    <div id="meusProjeto">
+        <div id="caixaImg">
+            <img src="img/apresetacao.png" alt="markit">
+        </div>
+        <div id="caixaTitulo">
+            <p id="titulo">Markite Digital</p>
+        </div>
+        <div id="caixaDescricao">
+            <p id="descricao">Marketing digital é uma estratégia de promoção de produtos, serviços ou marcas utilizando canais digitais.</p>
+        </div>
+    </div>
+    <div id="meusProjeto">
+        <div id="caixaImg">
+            <img src="server/img/web2.png" alt="{{c_img}}">
+        </div>
+        <div id="caixaTitulo">
+            <p id="titulo">Desevolvimento Web</p>
+        </div>
+        <div id="caixaDescricao">
+            <p id="descricao">Após o teste e a implantação, a manutenção contínua é essencial para garantir o desempenho e a segurança do site.</p>
+        </div>
+    </div>
+{{#each projetos}}
+<div id="meusProjeto">
+    <div id="caixaImg">
+        <img src="{{c_img}}" alt="{{c_img}}">
+    </div>
+    <div id="caixaTitulo">
+        <p id="titulo">{{nome_projeto}}</p>
+    </div>
+    <div id="caixaDescricao">
+        <p id="descricao">{{descricao_projeto}}</p>
+    </div>
+</div>
+{{/each}}
+</section>

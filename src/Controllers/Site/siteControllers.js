@@ -1,5 +1,5 @@
 const { MASTEE_DIR } = require("../../Helpers/constantes");
-
+const siteModules= require("../../models/models")
 const Home = (req,res)=>{
     return res.render('home',
     {
@@ -8,11 +8,14 @@ const Home = (req,res)=>{
     }
     );
 }
-const Projetos = (req,res)=>{
+const Projetos = async (req,res)=>{
+    const [projetos,outro]= await siteModules.verProjeto();
     return res.render('projeto',
     {
         layout:MASTEE_DIR,
-        title:"M2"
+        title:"Nossos Projetos",
+        projetos:projetos,
+
     }
     );
 }
