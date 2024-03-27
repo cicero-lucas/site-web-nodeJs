@@ -28,4 +28,20 @@ caixaPergunta.forEach((elem,index)=>{
 
 });
 
+// Admin
+const btnSair=[...document.querySelectorAll('.btnSair')];
+
+btnSair.map((el)=>{
+        el.addEventListener('click',()=>{
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ sair: 1 })
+            })
+    })
+})
+
+
 

@@ -72,7 +72,7 @@
     position: absolute;
     right: 0;
     z-index: 1;
-    width: 200px;
+    width: 320px;
     overflow: hidden;
     display: none;
 }
@@ -93,14 +93,14 @@
  }
 
 #menuLink{
-    width: 300px;
+    width: 320px;
     margin: 3rem auto;
     height: auto;
-    background-color: #e7cd04;
+    background-color: #83CCCD;
     transition: 1s ease-in;
-    transform: translateX(200px);
+    transform: translateX(340px);
     padding: 1rem;
-    border-top-left-radius: 10px;
+    border-top-left-radius: 20px;
     border-bottom-left-radius: 10px;
 }
 #menuLink > a{
@@ -118,6 +118,30 @@
     transform: translateX(-1px);
 }
 
+.btnSair{
+    display: block;
+    width: 100px;
+    height: 40px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    background-color: #4F97CD;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.166);
+    transition: 0.1s ease-in-out;
+    z-index: 2;
+}
+
+.btnSair:hover{
+    background-color: #003357;
+   
+}
+.btnSair:active{
+    background-color: yellow;
+    transition: 0
+   
+}
+
 /* main */
 
 main{
@@ -131,7 +155,6 @@ section#adminL{
     background-color: var(--secundario);
     margin: 1rem auto;
     width: 100%;
-    height: 500px;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -141,7 +164,7 @@ section#adminL{
 
 #imgLog{
     flex: 60%;
-    height: 400px;
+    height: 500px;
 }
 
 #imgLog img{
@@ -186,7 +209,52 @@ section#adminL{
     border-radius: 10px;
 }
 
+/* pagina admin */
 
+#paginaI{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.opcPaginaI{
+    width: 300px;
+    border: 2px solid var(--principal);
+    padding: 1rem ;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.opcTitulo{
+    font: 700 16px --fontTitulo;
+    margin: 1rem auto;
+}
+
+.btnP a {
+    text-decoration: none;
+}
+
+.btnP a button{
+    display: block;
+    width: 160px;
+    height: 40px;
+    margin: 2rem auto;
+    border: none;
+    background-color: var(--secundario);
+    border-radius: 10px;
+    transition:  0.5s ease-out;
+  
+}
+
+.btnP a button:hover{
+    background-color: #0092FA;
+}
+
+.btnP a button:active{
+    background-color: #f6fa00;
+}
 
 
 /* footer */
@@ -355,6 +423,18 @@ div#imgFooter img{
         justify-content: center;
     }
 
+    
+    #imgLog{
+        flex: 80%;
+       
+    }
+    
+    
+    #formularioL{
+        flex: 60%;
+        margin: 2rem auto;
+    }
+    
     
 }
 
