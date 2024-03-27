@@ -1,5 +1,6 @@
 const { MASTEE_DIR } = require("../../Helpers/constantes");
 const siteModules= require("../../models/models")
+
 const Home = (req,res)=>{
     return res.render('home',
     {
@@ -9,15 +10,20 @@ const Home = (req,res)=>{
     );
 }
 const Projetos = async (req,res)=>{
-    const [projetos,outro]= await siteModules.verProjeto();
+    try{
+        let [projetos,outro]= await siteModules.verProjeto();
     return res.render('projeto',
     {
         layout:MASTEE_DIR,
         title:"Nossos Projetos",
-        projetos:projetos,
+        projetos:(projetos)?projetos:'{sem dados}'
 
     }
     );
+    }catch{
+        console.log("erro! projeto");
+    }
+    
 }
 const Contato = (req,res)=>{
     return res.render('contato',

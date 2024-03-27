@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fontTitulo);
+    scroll-behavior: smooth;
+}
+
+:root{
+    --principal: #0092FA;
+    --secundario: #e7cd04;
+    --titulosecudario:#4F97CD;
+    --texto:#83CCCD;
+    --fontTitulo: "Montserrat", sans-serif;
+}
+
+#logo{
+    background: var(--principal);
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 21vh;
+    position: relative;
+}
+
+#logo #imgLogo{
+    flex: 30%;
+    height: 98%;
+    margin: 1% 2% 2% 8%;
+    overflow: hidden;
+}
+
+#imgLogo>img{
+    width: 40%;
+    height: 80%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+#logo nav{
+    flex: 50%;
+    height: 50px;
+    margin: 2% 8% 2% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#logo>nav a ,#menuLink>a{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-family:var(--fontTitulo);
+    font-size: 16px; 
+    cursor: pointer;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.144);
+    font-weight: 500;
+}
+
+#logo>nav>a:hover{
+    color: var(--secundario);
+    border-bottom: 2px solid var(--secundario);
+    transition: 1s ease-in-out;
+}
+
+/* menu moblile */
+
+#celular{
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    width: 200px;
+    overflow: hidden;
+    display: none;
+}
+
+#celular input[type="checkbox"]{
+    display: none;
+}
+
+#menuH{
+    float: right;
+    margin: 1rem;
+    
+}
+
+#menuH .homeIcone{
+    font-size: 38px;
+    color: white;
+ }
+
+#menuLink{
+    width: 300px;
+    margin: 3rem auto;
+    height: auto;
+    background-color: #e7cd04;
+    transition: 1s ease-in;
+    transform: translateX(200px);
+    padding: 1rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#menuLink > a{
+    display: block;
+    margin: 1rem;
+    padding: 0.2rem;
+}
+#menuLink > a:hover{
+    color: var(--principal);
+    border-bottom: 2px solid var(--principal);
+    transition: 1s ease-in-out;
+}
+
+#celular input[type="checkbox"]:checked ~ #menuLink{
+    transform: translateX(-1px);
+}
+
+/* main */
+
+main{
+    margin: 3rem auto;
+    max-width: 1400px;
+}
+
+/* login */
+
+section#adminL{
+    background-color: var(--secundario);
+    margin: 1rem auto;
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+#imgLog{
+    flex: 60%;
+    height: 400px;
+}
+
+#imgLog img{
+    width: 100%;
+    height: 98%;
+    object-fit: cover;
+}
+
+#formularioL{
+    flex: 40%;
+}
+
+#formularioL form{
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: auto;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+#formularioL form .campos{
+    margin: 1.5rem auto;
+}
+
+#formularioL form .campos input{
+    display: block;
+    margin: auto;
+    width: 90%;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+}
+
+#formularioL form .campos button{
+    display: block;
+    width: 40%;
+    height: 45px;
+    margin: 1.5rem auto;
+    border: none;
+    background-color: var(--principal);
+    border-radius: 10px;
+}
+
+
+
+
+/* footer */
+
+div#apEmpresa{
+    background-color: var(--principal);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+div#imgFooter{
+    flex: 20%;
+    height: 100px;
+    margin: 2% 3%;
+}
+
+div#imgFooter img{
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+}
+
+#navFooter{
+    flex: 20%;
+    margin: 2% 8%;
+}
+#navf{
+    width: 130px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+#msg{
+    display: block;
+    width: 100%;
+    margin: 2rem;
+    text-align: center;
+    color: white;
+}
+
+#navf a{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-family:var(--fontTitulo);
+    font-weight: 600;
+    font-size: 16px; 
+    cursor: pointer;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.144);
+}
+
+#navf>a:hover{
+    color: var(--secundario);
+    border-bottom: 2px solid var(--secundario);
+    transition: 1s ease-in-out;
+
+}
+
+#imgfooter{
+    flex: 20%;
+    height: 100px;
+    margin: 2% 8%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#imgfooter img{
+    width: 35px;
+    height: 35px;
+    object-fit: fill;
+
+}
+
+@media screen and (max-width:420px) {
+    .apServicos{
+        height: auto;
+    }
+   
+    
+}
+@media screen and (min-width:840px) and (max-width:1200px)  {
+
+    #logo nav{
+        display: none;
+    }
+
+    #celular{
+        display: block;
+    }
+
+    #imgApresetacao{
+        flex: 55%;
+        height: 100%;
+    }
+  
+    #caixaTextoa{
+        flex:45%;
+        font-family: var(--fontTitulo);
+        margin: auto;
+        text-align: center;
+    }
+    #textoa{
+        width: 100%;
+        padding: 0.2rem;
+        border: 2px solid var(--principal);
+        border-radius: 15px;
+        box-sizing: 1px 1px 1px rgba(0, 0, 0, 0.049);
+      
+        
+    }
+   
+    
+}
+
+
+@media screen and (max-width:840px){
+
+    #logo nav{
+        display: none;
+    }
+
+    #celular{
+        display: block;
+    }
+    
+    main{
+        margin: 3rem auto;
+        max-width: 100%;
+
+    }
+
+    section#caixaApresetacao{
+        display: block;
+        height: auto;
+        margin: 2rem auto;
+    }
+
+    #imgApresetacao{
+        display: block;
+        width: 100%;
+        margin: auto;
+        text-align: center
+    }
+    #imgApresetacao img{
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+
+    #caixaTextoa #textoa{
+        display: block;
+        width: 80%;
+        margin: 1rem auto;
+    
+    }
+    #projeto,#projetom{
+        width: 99%;
+        margin: 3rem auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+}
+
