@@ -48,22 +48,83 @@ function paginaCriarProjeto(req,res){
     })
     
 }
-function paginaVerProjeto(req,res){
+
+function paginaEditarDuvidas(req,res){
+    return res.render('admin/criarPergunta',{
+        layout:MASTEEADIM_DIR,
+        title:"Criar Pergunta"
+       
+    })
+    
+}
+function paginaEditarProjeto(req,res){
+    return res.render('admin/criarProjeto',{
+        layout:MASTEEADIM_DIR,
+        title:"criar projeto"
+       
+    })
+    
+}
+
+function paginaEditarDuvidas(req,res){
+    return res.render('admin/criarPergunta',{
+        layout:MASTEEADIM_DIR,
+        title:"Criar Pergunta"
+       
+    })
+    
+}
+function paginaCriarProjeto(req,res){
+    return res.render('admin/criarProjeto',{
+        layout:MASTEEADIM_DIR,
+        title:"criar projeto"
+       
+    })
+    
+}
+
+async function paginaVerProjeto(req,res){
+    try{
+        var [projetos,outro]=[null,null];
+        
+        if(await siteModules.verProjeto()){
+            var [projetos,outro]= await siteModules.verProjeto();
+        }
+
+    
+    }catch{
+        console.log("erro! projeto");
+    }
     return res.render('admin/verProjeto',{
         layout:MASTEEADIM_DIR,
-        title:"ver projeto"
+        title:"ver projeto",
+        projetos:projetos
        
     })
     
 }
-function paginaVerDuvida(req,res){
+async function paginaVerDuvida(req,res){
+   
+    try{
+        var [duvidas,outro]=[null,null];
+        
+        if(await siteModules.verDuvidasF()){
+            var [duvidas,outro]= await siteModules.verDuvidasF();
+        }
+    
+    }catch{
+        console.log("erro! projeto");
+    }
     return res.render('admin/verPergunta',{
         layout:MASTEEADIM_DIR,
-        title:"ver pergunta"
+        title:"ver projeto",
+        duvidas:duvidas
        
     })
     
 }
+    
+
 
 function logoutAdmin(req, res) {
     if (req.body.sair === 1 && req.session.login) {
@@ -71,7 +132,7 @@ function logoutAdmin(req, res) {
             if (err) {
                 return res.redirect('admin/pagina');
             } else {
-                return res.redirect('/admin');
+                return res.redirect('../admin');
             }
         });
     } else {

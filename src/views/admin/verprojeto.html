@@ -1,0 +1,44 @@
+<section class="caixaVer">
+    {{#each projetos}}
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">Titulo Projeto</th>
+                <th style="width: 30%;">Descrição</th>
+                <th style="width: 20%;">Tipo</th>
+                <th style="width: 20%;">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{nome_projeto}}</td>
+                <td>{{descricao_projeto}}</td>
+                <td>
+                    <select name="tipo" id="tipo">
+                        <option value="tipo" disabled selected> {{tipo_p}}</option>
+                    </select>
+            </td>
+                <td class="caixabT">
+                    <a href="">
+                        <button class="btnE">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </button>
+                    </a>
+                    <a href="">
+                        <button class="btnD">
+                            <span class="material-symbols-outlined">
+                            delete
+                            </span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+    {{/each}}
+
+</section>

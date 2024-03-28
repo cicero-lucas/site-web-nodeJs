@@ -1,0 +1,39 @@
+<section class="caixaVer">
+
+    {{#each duvidas}}
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40%;">Pergunta</th>
+                    <th style="width: 40%;">Resposta</th>
+                    <th style="width: 20%;">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{m_pergunta}}</td>
+                    <td>{{m_resposta}}</td>
+                    <td class="caixabT">
+                        <a href="">
+                            <button class="btnE">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+                        </a>
+                        <a href="">
+                            <button class="btnD">
+                                <span class="material-symbols-outlined">
+                                delete
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+    
+    {{/each}}
+        
+    </section>

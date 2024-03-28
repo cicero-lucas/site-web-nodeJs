@@ -11,12 +11,17 @@ const Home = (req,res)=>{
 }
 const Projetos = async (req,res)=>{
     try{
-        let [projetos,outro]= await siteModules.verProjeto();
+        var [projetos,outro]=[null,null];
+        
+        if(await siteModules.verProjeto()){
+            var [projetos,outro]= await siteModules.verProjeto();
+        }
+
     return res.render('projeto',
     {
         layout:MASTEE_DIR,
         title:"Nossos Projetos",
-        projetos:(projetos)?projetos:'{sem dados}'
+        projetos:projetos
 
     }
     );
