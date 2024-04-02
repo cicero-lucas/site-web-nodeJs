@@ -1,6 +1,8 @@
 const session = require("express-session");
 const {MASTEEADIM_DIR, MASTEE_DIR} = require("../../Helpers/constantes");
 const siteModules= require("../../models/models");
+const multer = require('multer');
+const { storage } = require('../../Helpers/UpdateArquivo'); 
 
 
 let emailAdm="matheus@email.com";

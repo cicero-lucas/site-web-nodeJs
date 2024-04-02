@@ -3,6 +3,11 @@ const siteController = require('../Controllers/Site/siteControllers');
 const adimController = require('../Controllers/Admin/adimControllers');
 const middleware = require("../middleware/middllewares")
 const Rotas = express.Router();
+const { storage } = require('../Helpers/UpdateArquivo');
+const multer = require("multer");
+const upload = multer({ storage: storage });
+
+const up = require("../Controllers/Admin/up")
 
 try{
     Rotas.get('/',siteController.Home);
@@ -17,7 +22,7 @@ try{
     Rotas.get('/admin/criar/duvidas',adimController.paginaCriarDuvidas);
     Rotas.get('/admin/criar/projeto',adimController.paginaCriarProjeto);
     Rotas.post('/admin/criar/duvidas',adimController.paginaCriarDuvidas);
-    Rotas.post('/admin/criar/projeto',adimController.paginaCriarProjeto);
+    Rotas.post('/admin/criar/projeto',upload.single('file'),up.paginaCriarProjeto);
 
     Rotas.get('/admin/ver/duvidas',adimController.paginaVerDuvida);
     Rotas.get('/admin/ver/projetos',adimController.paginaVerProjeto);
