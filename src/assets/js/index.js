@@ -33,7 +33,7 @@ const btnSair=[...document.querySelectorAll('.btnSair')];
 
 btnSair.map((el)=>{
         el.addEventListener('click',()=>{
-            fetch('/logout', {
+            fetch('', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

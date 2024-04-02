@@ -1,23 +1,31 @@
 <section class="caixaF">
-    <form action="#">
+    <P id="mensagem">
+        {{mensagemAlerta}}
+    </P>
+   
+    <form action="#" method="post">
         <div class="campos">
             <p class="tituloF">Adicionar Projeto!</p>
         </div>
         <div class="campos">
-            <img src="" alt="imgprojeto">
+            <img src="" alt="imgprojeto" >
         </div>
         <div class="campos">
-           <input type="file" placeholder="coloque a imagem do projeto">
-        </div>
+            <input type="file" placeholder="coloque a imagem do projeto">
+         </div>
+
         <div class="campos">
             <input type="text" placeholder="Digite o nome do projeto" name="nomeProjeto">
         </div>
         <div class="campos">
-            <textarea name="resposta" id="desProjeto" cols="30" rows="10" placeholder="Digite a Descrição do projeto:"></textarea >
+            <textarea name="desProjeto" id="desProjeto" cols="30" rows="10" placeholder="Digite a Descrição do projeto:"></textarea >
         </div>
         <div class="campos">
-            <select name="tipoProjeto" id="tipoProjeto">
-                <option value="-" selected disabled>Escolha o tipo do Projeto</option>
+            <select name="ntipo" id="tipoProjeto">
+                <option  value="0" selected  disabled>Escolha o tipo do Projeto</option>
+                {{#each tipos}}
+                 <option value="{{id_tipo}}">{{tipo_p}}</option>
+                {{/each}}
             </select>
         </div>
         <div class="campos">
@@ -26,3 +34,4 @@
         
     </form>
 </section>
+

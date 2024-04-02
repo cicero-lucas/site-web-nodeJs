@@ -32,22 +32,61 @@ function paginaAdimin(req,res){
 }
 
 
-function paginaCriarDuvidas(req,res){
-    return res.render('admin/criarPergunta',{
-        layout:MASTEEADIM_DIR,
-        title:"Criar Pergunta"
-       
-    })
+async function paginaCriarDuvidas(req, res) {
     
-}
-function paginaCriarProjeto(req,res){
-    return res.render('admin/criarProjeto',{
-        layout:MASTEEADIM_DIR,
-        title:"criar projeto"
-       
-    })
+        try {
+            const { pergunta, resposta } = req.body;
+            var mensagemAlerta = "";
+            if(req.body=="{}"){
+                mensagemAlerta = 'Por favor, envia a pergunta';
+            }
+            if (!pergunta || !resposta) {
+                mensagemAlerta = 'Por favor, forneça tanto a pergunta quanto a resposta.';
+            } else {
+                await siteModules.criarPergunta(pergunta, resposta);
+                mensagemAlerta = 'Pergunta criada com sucesso!';
+            }
+        } catch (error) {
+            console.error('Erro ao cadastrar perguntas:', error);
+        }
     
+        return res.render('admin/criarPergunta', {
+            layout: MASTEEADIM_DIR,
+            title: "Criar Pergunta",
+            mensagemAlerta: mensagemAlerta
+        });
+
 }
+
+async function paginaCriarProjeto(req, res) {
+    try {
+        var [tipo, outro] = [null, null];
+
+        if (await siteModules.verTipo()) {
+            [tipo, outro] = await siteModules.verTipo();
+        }
+        const { nomeProjeto, desProjeto, ntipo } = req.body;
+        console.log(req.body)
+        if (!nomeProjeto || !desProjeto || !ntipo) {
+            mensagemAlerta = 'Por favor, forneça tanto a pergunta quanto a resposta.';
+        } else {
+           
+            mensagemAlerta = 'Pergunta criada com sucesso!';
+        }
+    } catch (error) {
+        console.error('Erro ao cadastrar projeto:', error);
+    }
+
+    return res.render('admin/criarProjeto', {
+        layout: MASTEEADIM_DIR,
+        title: "Criar Projeto",
+        tipos: tipo,
+        mensagemAlerta: mensagemAlerta
+    });
+}
+
+    
+
 
 function paginaEditarDuvidas(req,res){
     return res.render('admin/criarPergunta',{
@@ -70,14 +109,6 @@ function paginaEditarDuvidas(req,res){
     return res.render('admin/criarPergunta',{
         layout:MASTEEADIM_DIR,
         title:"Criar Pergunta"
-       
-    })
-    
-}
-function paginaCriarProjeto(req,res){
-    return res.render('admin/criarProjeto',{
-        layout:MASTEEADIM_DIR,
-        title:"criar projeto"
        
     })
     
@@ -132,7 +163,8 @@ function logoutAdmin(req, res) {
             if (err) {
                 return res.redirect('admin/pagina');
             } else {
-                return res.redirect('../admin');
+                console.log(res.redirect('.admin'))
+                return res.redirect('../.././admin');
             }
         });
     } else {

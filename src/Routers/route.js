@@ -12,20 +12,22 @@ try{
 
     Rotas.get('/admin',adimController.adimLogin);
     Rotas.post('/admin',adimController.adimLogin);
-    Rotas.get('/admin/pagina',adimController.paginaAdimin);
+
+    Rotas.get('/admin/pagina',middleware.verificarAutenticacao,adimController.paginaAdimin);
     Rotas.get('/admin/criar/duvidas',adimController.paginaCriarDuvidas);
     Rotas.get('/admin/criar/projeto',adimController.paginaCriarProjeto);
+    Rotas.post('/admin/criar/duvidas',adimController.paginaCriarDuvidas);
+    Rotas.post('/admin/criar/projeto',adimController.paginaCriarProjeto);
 
     Rotas.get('/admin/ver/duvidas',adimController.paginaVerDuvida);
     Rotas.get('/admin/ver/projetos',adimController.paginaVerProjeto);
  
     Rotas.get('/admin/editar/duvidas:id',adimController.paginaVerDuvida);
     Rotas.get('/admin/editar/projetos:id',adimController.paginaVerProjeto);
+    Rotas.post('/admin/editar/duvidas:id',adimController.paginaVerDuvida);
+    Rotas.post('/admin/editar/projetos:id',adimController.paginaVerProjeto);
  
-    Rotas.get('/admin/editar/duvidas:id',adimController.paginaVerDuvida);
-    Rotas.get('/admin/editar/projetos:id',adimController.paginaVerProjeto);
- 
-    Rotas.post('/logout',middleware.verificarAutenticacao,adimController.logoutAdmin)
+    Rotas.post('/admin/logout',adimController.logoutAdmin)
 
     Rotas.get("*",siteController.erro);
 

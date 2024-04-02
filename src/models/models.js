@@ -11,6 +11,17 @@ async function verProjeto(){
         console.log("erro!");
     }
 }
+async function verTipo(){
+    try{
+        const query="SELECT * FROM tb_tipo_projeto;";
+
+        const tipo = await connection.execute(query);
+        return tipo;
+
+    }catch{
+        console.log("erro!");
+    }
+}
 
 async function verDuvidasF(){
     try{
@@ -24,7 +35,35 @@ async function verDuvidasF(){
     }
 }
 
+async function criarDuvidasF(dados){
+    try{
+        const query="SELECT * from tb_duvidasfrequentes";
+
+        const duvidasF=connection.execute(query);
+        
+        return duvidasF;
+    }catch{
+        console.log('erro!');
+    }
+}
+
+async function criarPergunta(pergunta,resposta){
+    try{
+        const query = "INSERT INTO tb_duvidasfrequentes (m_pergunta, m_resposta) VALUES (?, ?)";
+        const [rows, fields] = await connection.execute(query, [pergunta, resposta]);
+
+        console.log('Pergunta criada com sucesso!');
+    
+        
+    }catch(erro){
+        console.log('erro!',erro);
+    }
+}
+
 module.exports={
     verDuvidasF,
-    verProjeto
+    verProjeto,
+    criarPergunta,
+    verTipo
 }
+

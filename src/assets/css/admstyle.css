@@ -438,6 +438,7 @@ tbody td.caixabT{
     justify-content: center;
     align-items: center;
 }
+
 tbody td.caixabT a{
    text-decoration: none;
    margin: 1px 10px;
@@ -483,6 +484,15 @@ tbody td.caixabT a .btnE:hover{
 tbody td.caixabT a{
    text-decoration: none;
    margin: 1px 10px;
+}
+
+#mensagem{
+    margin: 1rem auto;
+    background-color: #e7cd04;
+    width: 80%;
+    padding: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
 }
 
 @media screen and (max-width:420px) {
