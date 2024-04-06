@@ -1,9 +1,21 @@
 <section id="adminL">
+
+{{#if menssagem}}
+    {{#each menssagem}}
+    <div class="caixaMensagem {{class}}">
+        <p >{{msg}}</p>
+        <span class="fecharMsg material-icons-outlined">close</span>
+    </div>
+    {{/each}}
+    
+{{/if}}
     <div id="imgLog">
         <img src="img/apresetacao.png" alt="img">
     </div>
+   
     <div id="formularioL">
-        <form action="/admin" method="post">
+        <form action="/admin" method="post" class="caixaPMsg">
+            
             <div class="campos">
                 <input type="email" placeholder="Digite seu Email" name="email">
             </div>

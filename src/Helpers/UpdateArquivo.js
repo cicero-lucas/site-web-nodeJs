@@ -1,15 +1,25 @@
 const multer = require('multer');
 const path = require('path');
 
-// Definição do local de armazenamento e do nome do arquivo
-const storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback(null, path.resolve("assets/server/img"));
-    },
-    filename: (req, file, callback) => {
-        const time = new Date().getTime();
-        callback(null, `${time}_${file.originalname}`);
-    }
-});
+module.exports=(multer({
+    storage:multer.diskStorage({
+        destination:(req,res,cb)=>{
+            cb(null,path.resolve('./src/public/sever'));
+        },
 
-module.exports = {storage};
+        filename:(req,file,cb)=>{
+            const time = new Date().getTime();
+            cb(null,`${time}-${file.originalname}`)
+        }
+    }),
+    fileFilter:(req,file,cb)=>{
+
+        const extImg=['image/png','image/jpg','image/jpeg'].find(formatoAceito=> formatoAceito == file.mimetype);
+
+        if(extImg){
+            return cb(null,true)
+        }
+
+        return cb(null,false)
+    }
+}))

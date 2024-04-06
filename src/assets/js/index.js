@@ -45,3 +45,23 @@ btnSair.map((el)=>{
 
 
 
+// mensagem
+
+
+function mostrarMensagem() {
+    const mensagemDiv = document.querySelector('.caixaMensagem');
+    mensagemDiv.classList.add('show');
+    setTimeout(() => {
+        mensagemDiv.classList.remove('show');
+    }, 3000);
+}
+
+
+document.querySelector('.fecharMsg').addEventListener('click', function() {
+    document.querySelector('.caixaMensagem').classList.remove('show');
+});
+
+
+window.onload = function() {
+    mostrarMensagem();
+};

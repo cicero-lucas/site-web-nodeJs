@@ -1,17 +1,18 @@
 <section class="caixaF">
-    <P id="mensagem">
-        {{mensagemAlerta}}
-    </P>
+    {{#each menssagem}}
+    <div class="caixaMensagem {{class}}">
+        <p >{{msg}}</p>
+        <span class="fecharMsg material-icons-outlined">close</span>
+    </div>
+    {{/each}}
    
-    <form action="/admin/criar/projeto" method="post" enctype="multipart/form-data">
+    <form action="/admin/criar/projeto" method="post" enctype="multipart/form-data" >
         <div class="campos">
-            <p class="tituloF">Adicionar Projeto!</p>
+            <p class="tituloF">Adicionar Projeto no site!</p>
         </div>
+
         <div class="campos">
-            <img src="" alt="imgprojeto" >
-        </div>
-        <div class="campos">
-            <input type="file" placeholder="coloque a imagem do projeto">
+            <input type="file" name="image" placeholder="coloque a imagem do projeto">
          </div>
 
         <div class="campos">

@@ -4,6 +4,7 @@ const Rotas = require('./Routers/route');
 const cors = require('cors');
 const session= require("express-session");
 const bodyParser= require("body-parser");
+const flash = require('connect-flash');
 const { init: templeteSite } = require("./Helpers/Templete");
 const path = require('path');
 const app = express();
@@ -13,8 +14,9 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
 }));
+
+app.use(flash());
 
 app.use(express.static(path.join(__dirname, "assets")));
 

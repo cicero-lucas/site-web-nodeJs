@@ -1,6 +1,12 @@
 <section class="caixaF">
-    <p id="mensagem">{{ mensagemAlerta}}</p>
-    <form action="#" method="post">
+    {{#each menssagem}}
+    <div class="caixaMensagem {{class}}">
+        <p >{{msg}}</p>
+        <span class="fecharMsg material-icons-outlined">close</span>
+    </div>
+    {{/each}}
+
+    <form action="/admin/criar/duvidas" method="post">
         <div class="campos">
             <p class="tituloF">Crie sua Pergunta!</p>
         </div>

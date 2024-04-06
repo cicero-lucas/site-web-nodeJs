@@ -608,3 +608,40 @@ tbody td.caixabT a{
     
 }
 
+/* mensagem */
+
+.caixaMensagem {
+    width: 90%;
+    border-radius: 5px;
+    display: none;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5rem;
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.caixaMensagem.show {
+    display: block;
+}
+
+.fecharMsg  {
+    cursor: pointer;
+    float: right;
+    font-size: 16px;
+    
+}
+
+
+.msgInfo{
+    background-color: #0066ae;
+    color: white;
+}
+.msgSucesso{
+    background-color: #51ff0076;
+    color: green;
+}
+.msgErro{
+    background-color: #ff00006c;
+    color: rgb(128, 0, 0);
+}

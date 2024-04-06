@@ -1,30 +1,42 @@
 const session = require("express-session");
 const {MASTEEADIM_DIR, MASTEE_DIR} = require("../../Helpers/constantes");
 const siteModules= require("../../models/models");
-const multer = require('multer');
-const { storage } = require('../../Helpers/UpdateArquivo'); 
 
 
 let emailAdm="matheus@email.com";
 let senhaAdm="1";
 
 
-function adimLogin(req,res){
-    const { email, senha } = req.body;
+function getadimLogin(req,res){
 
-    if(emailAdm == email && senhaAdm == senha){
+    return res.render('admin/adminLogin',{
+        layout:MASTEEADIM_DIR,
+        title:"Pagina Login",
+        menssagem: req.flash('info') 
+    });
+   
+   
+}
+function postadimLogin(req,res){
+    const { email, senha } = req.body;
+    if(!email){
+        req.flash('info',{msg:'Coloque seu emeil!', class:"msgInfo"});
+        res.redirect('../admin');    
+    }else if (!senha){
+        req.flash('info', {msg:'Coloque a senha!', class:"msgInfo"});
+        res.redirect('../admin');
+    }else if(emailAdm == email && senhaAdm == senha){
         req.session.login = email;
-        return res.redirect('admin/pagina');
+        req.flash('info', {msg:'Bem vindo!', class:"msgInfo"});
+        return res.redirect('../admin/pagina');
     }else{
-        return res.render('admin/adminLogin',{
-            layout:MASTEEADIM_DIR,
-            title:"Login",
-        });
+        req.flash('info', {msg:'emeil ou senha incorretas!', class:"msgErro"});
+        res.redirect('../admin');
     }
    
 }
 
-function paginaAdimin(req,res){
+function getpaginaAdimin(req,res){
     return res.render('admin/adminPrincipal',{
         layout:MASTEEADIM_DIR,
         title:"Pagina Administrador"
@@ -33,73 +45,124 @@ function paginaAdimin(req,res){
     
 }
 
-
-async function paginaCriarDuvidas(req, res) {
-    
-        try {
-            const { pergunta, resposta } = req.body;
-            var mensagemAlerta = "";
-            if(req.body=="{}"){
-                mensagemAlerta = 'Por favor, envia a pergunta';
-            }
-            if (!pergunta || !resposta) {
-                mensagemAlerta = 'Por favor, forneça tanto a pergunta quanto a resposta.';
-            } else {
-                await siteModules.criarPergunta(pergunta, resposta);
-                mensagemAlerta = 'Pergunta criada com sucesso!';
-            }
-        } catch (error) {
-            console.error('Erro ao cadastrar perguntas:', error);
-        }
-    
-        return res.render('admin/criarPergunta', {
-            layout: MASTEEADIM_DIR,
-            title: "Criar Pergunta",
-            mensagemAlerta: mensagemAlerta
-        });
+async function getpaginaCriarDuvidas(req, res) {
+    return res.render('admin/criarPergunta', {
+        layout: MASTEEADIM_DIR,
+        title: "Criar Pergunta",
+        menssagem: req.flash('info') 
+    });
 
 }
 
-async function paginaCriarProjeto(req, res) {
+
+
+async function postpaginaCriarDuvidas(req, res) {
+        try {
+           
+            const { pergunta, resposta } = req.body;
+
+            if(!req.body){
+                req.flash('info',{msg:'Por favor, forneça tanto a pergunta quanto a resposta.', class:"msgInfo"});
+                res.redirect('../criar/duvidas');
+            }else if (!pergunta ) {
+                req.flash('info',{msg:'Por favor, forneça  a pergunta !', class:"msgInfo"});
+                res.redirect('../criar/duvidas');
+            }else if (!resposta ) {
+                req.flash('info',{msg:'Por favor, forneça  a resposta!', class:"msgInfo"});
+                res.redirect('../criar/duvidas');
+            }else {
+                await siteModules.criarPergunta(pergunta, resposta);
+                req.flash('info',{msg:'pergunta cadastrada com sucesso',class:"msgSucesso"});
+                res.redirect('../criar/duvidas');
+            }
+        } catch (error) {
+            req.flash('info',{msg:'Erro ao cadastrar perguntas:!', class:"msgErro"});
+            res.redirect('../criar/duvidas');
+        }
+    
+}
+
+
+
+async function getPaginaCriarProjeto(req, res) {
+    var [tipo, outro] = [null, null];
+    
+    if (await siteModules.verTipo()) {
+        [tipo, outro] = await siteModules.verTipo();
+    }
+    return res.render('admin/criarProjeto', {
+        layout: MASTEEADIM_DIR,
+        title: "Criar Projeto",
+        tipos: tipo,
+        menssagem: req.flash('info')
+    });
+}
+
+    
+async function postpaginaCriarProjeto(req, res) {
     try {
         var [tipo, outro] = [null, null];
 
         if (await siteModules.verTipo()) {
             [tipo, outro] = await siteModules.verTipo();
         }
-        const { nomeProjeto, desProjeto, ntipo } = req.body;
-        console.log(req.body)
-        if (!nomeProjeto || !desProjeto || !ntipo) {
-            mensagemAlerta = 'Por favor, forneça tanto a pergunta quanto a resposta.';
-        } else {
-           
-            mensagemAlerta = 'Pergunta criada com sucesso!';
+        if(!req.body){
+            req.flash('info',{msg:'Por favor, forneça tanto a pergunta quanto a resposta.', class:"msgInfo"});
+            res.redirect('../criar/projeto');
+        }else{
+            const {nomeProjeto, desProjeto, ntipo } = req.body;
+        if (!nomeProjeto ){
+          
+            req.flash('info',{msg:'Por favor, forneça  o nome do projeto !', class:"msgInfo"});
+            res.redirect('../criar/projeto');
+            
+        }else if (!desProjeto){
+            req.flash('info',{msg:'Por favor, forneça a descrição do projeto!', class:"msgInfo"});  
+            res.redirect('../criar/projeto');
+        }else if(!ntipo){
+            req.flash('info',{msg:'Por favor, forneça um tipo para o projeto!', class:"msgInfo"});  
+            res.redirect('../criar/projeto');
+        }else{
+            const camminhoImg=req.file.path;
+            await siteModules.criarprojetos(nomeProjeto,desProjeto,camminhoImg,ntipo);
+            res.redirect('../criar/projeto');
+            
         }
+        
+      }
+ 
     } catch (error) {
-        console.error('Erro ao cadastrar projeto:', error);
+        req.flash('info',{msg:'Erro ao cadastrar projeto!', class:"msgInfo"});
     }
 
-    return res.render('admin/criarProjeto', {
-        layout: MASTEEADIM_DIR,
-        title: "Criar Projeto",
-        tipos: tipo,
-        mensagemAlerta: mensagemAlerta
-    });
+   
 }
 
     
 
 
-function paginaEditarDuvidas(req,res){
-    return res.render('admin/criarPergunta',{
+function getpaginaEditarDuvidas(req,res){
+   if(!req.params){
+  
+   }else{
+    const {idDuvida} = req.params;
+    console.log(idDuvida)
+   }
+    return res.render('admin/editarPergunta',{
         layout:MASTEEADIM_DIR,
-        title:"Criar Pergunta"
+        title:"Edita Projeto"
+       
        
     })
     
 }
-function paginaEditarProjeto(req,res){
-    return res.render('admin/criarProjeto',{
+function postpaginaEditarDuvidas(req,res){
+    
+    
+}
+
+function postpaginaEditarProjeto(req,res){
+    return res.render('admin/editarPergunta',{
         layout:MASTEEADIM_DIR,
         title:"criar projeto"
        
@@ -107,14 +170,15 @@ function paginaEditarProjeto(req,res){
     
 }
 
-function paginaEditarDuvidas(req,res){
-    return res.render('admin/criarPergunta',{
+function getpaginaEditarProjeto(req,res){
+    return res.render('admin/editarPergunta',{
         layout:MASTEEADIM_DIR,
-        title:"Criar Pergunta"
+        title:"Edita Projeto"
        
     })
     
 }
+
 
 async function paginaVerProjeto(req,res){
     try{
@@ -159,7 +223,22 @@ async function paginaVerDuvida(req,res){
     
 
 
-function logoutAdmin(req, res) {
+function getlogoutAdmin(req, res) {
+    if (req.body.sair === 1 && req.session.login) {
+        req.session.destroy(err => {
+            if (err) {
+                return res.redirect('admin/pagina');
+            } else {
+                console.log(res.redirect('.admin'))
+                return res.redirect('../.././admin');
+            }
+        });
+    } else {
+        console.log("a")
+    }
+}
+
+function postlogoutAdmin(req, res) {
     if (req.body.sair === 1 && req.session.login) {
         req.session.destroy(err => {
             if (err) {
@@ -176,11 +255,27 @@ function logoutAdmin(req, res) {
 
 
 module.exports={
-    adimLogin,
-    paginaAdimin,
-    logoutAdmin,
-    paginaCriarDuvidas,
-    paginaCriarProjeto,
+    getadimLogin,
+    postadimLogin,
+
+    getPaginaCriarProjeto,
+    postpaginaCriarProjeto,
+
+    getpaginaCriarDuvidas,
+    postpaginaCriarDuvidas,
+
+    getpaginaEditarDuvidas,
+    postpaginaEditarDuvidas,
+
+    getpaginaEditarProjeto,
+    postpaginaEditarProjeto,
+
+    getpaginaAdimin,
+
     paginaVerProjeto,
-    paginaVerDuvida
+    paginaVerDuvida,
+
+    getlogoutAdmin,
+    postlogoutAdmin
+  
 }
