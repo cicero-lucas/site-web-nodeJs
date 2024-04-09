@@ -20,6 +20,8 @@ app.use(flash());
 
 app.use(express.static(path.join(__dirname, "assets")));
 
+app.use(express.static(path.join(__dirname)));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors({

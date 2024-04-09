@@ -1,0 +1,42 @@
+<section class="caixaF">
+    {{#each menssagem}}
+    <div class="caixaMensagem {{class}}">
+        <p >{{msg}}</p>
+        <span class="fecharMsg material-icons-outlined">close</span>
+    </div>
+    {{/each}}
+
+   
+    <form action="/admin/criar/projeto" method="post" enctype="multipart/form-data" >
+        
+        <div class="campos">
+            <p class="tituloF">Adicionar Projeto!</p>
+        </div>
+        <div class="campos">
+            <img src="" alt="imgprojeto" >
+        </div>
+        <div class="campos">
+            <input type="file" name="image" placeholder="coloque a imagem do projeto">
+         </div>
+
+        <div class="campos">
+            <input type="text" placeholder="Digite o nome do projeto" name="nomeProjeto">
+        </div>
+        <div class="campos">
+            <textarea name="desProjeto" id="desProjeto" cols="30" rows="10" placeholder="Digite a Descrição do projeto:"></textarea >
+        </div>
+        <div class="campos">
+            <select name="ntipo" id="tipoProjeto">
+                <option  value="0" selected  disabled>Escolha o tipo do Projeto</option>
+                {{#each tipos}}
+                 <option value="{{id_tipo}}">{{tipo_p}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="campos">
+            <button class="btnC">Envia</button>
+        </div>
+        
+    </form>
+</section>
+

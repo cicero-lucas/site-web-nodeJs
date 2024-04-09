@@ -1,6 +1,13 @@
-<section class="caixaVer">
 
-    {{#each duvidas}}
+{{#each menssagem}}
+<div class="caixaMensagem {{class}}">
+    <p >{{msg}}</p>
+    <span class="fecharMsg material-icons-outlined">close</span>
+</div>
+{{/each}}
+
+<section class="caixaVer">
+{{#each duvidas}}
         <table>
             <thead>
                 <tr>
@@ -14,14 +21,14 @@
                     <td>{{m_pergunta}}</td>
                     <td>{{m_resposta}}</td>
                     <td class="caixabT">
-                        <a href=/admin/editar/duvidas:{{id_duvida}}>
+                        <a href=/admin/editar/duvidas/{{id_duvida}}>
                             <button class="btnE">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
                         </a>
-                        <a href="/admin/editar/duvidas:{{id_duvida}}">
+                        <a href="/admin/deletar/duvidas/{{id_duvida}}">
                             <button class="btnD">
                                 <span class="material-symbols-outlined">
                                 delete

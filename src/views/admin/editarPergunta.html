@@ -6,19 +6,21 @@
     </div>
     {{/each}}
 
-    <form action="/admin/criar/duvidas" method="post">
-        <div class="campos">
-            <p class="tituloF">Editar Pergunta!</p>
-        </div>
-        <div class="campos">
-            <input type="text" placeholder="Digite sua pergunta:" name="pergunta">
-        </div>
-        <div class="campos">
-            <textarea name="resposta" id="resposta" cols="30" rows="10" placeholder="Digite sua resposta:"></textarea >
-        </div>
-        <div class="campos">
-            <button class="btnC">Editar</button>
-        </div>
+    {{#each pergunta}}
+    <form  method="post">  
         
+            <div class="campos">
+                <p class="tituloF">Editar Pergunta de numero {{id_duvida}}!</p>
+            </div>
+            <div class="campos">
+                <input type="text" placeholder="Digite sua pergunta:" name="pergunta" value="{{m_pergunta}}">
+            </div>
+            <div class="campos">
+                <textarea name="resposta" id="resposta" cols="30" rows="10" placeholder="Digite sua resposta:" > {{m_resposta}}</textarea >
+            </div>
+            <div class="campos">
+                <button class="btnC">Editar</button>
+            </div> 
     </form>
+ {{/each}}
 </section>

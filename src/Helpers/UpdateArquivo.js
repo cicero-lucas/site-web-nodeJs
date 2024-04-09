@@ -1,25 +1,26 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
-module.exports=(multer({
-    storage:multer.diskStorage({
-        destination:(req,res,cb)=>{
-            cb(null,path.resolve('./src/public/sever'));
+const uploadImg = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, path.resolve('./src/public/sever'));
         },
-
-        filename:(req,file,cb)=>{
+        filename: (req, file, cb) => {
             const time = new Date().getTime();
-            cb(null,`${time}-${file.originalname}`)
+            cb(null, `${time}-${file.originalname}`);
         }
     }),
-    fileFilter:(req,file,cb)=>{
-
-        const extImg=['image/png','image/jpg','image/jpeg'].find(formatoAceito=> formatoAceito == file.mimetype);
-
-        if(extImg){
-            return cb(null,true)
+    fileFilter: (req, file, cb) => {
+        const extImg = ['image/png', 'image/jpg', 'image/jpeg'].find(formatoAceito => formatoAceito == file.mimetype);
+        if (extImg) {
+            return cb(null, true);
         }
-
-        return cb(null,false)
+        return cb(null, false);
     }
-}))
+});
+
+
+
+module.exports = { uploadImg };

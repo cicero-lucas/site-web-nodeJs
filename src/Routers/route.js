@@ -2,9 +2,9 @@ const express = require('express');
 const siteController = require('../Controllers/Site/siteControllers');
 const adimController = require('../Controllers/Admin/adimControllers');
 const middleware = require("../middleware/middllewares")
+const { uploadImg } = require('../Helpers/UpdateArquivo');
 const Rotas = express.Router();
-const uploads = require('../Helpers/UpdateArquivo');
-const up = require("../Controllers/Admin/up")
+
 
 try{
     Rotas.get('/',siteController.Home);
@@ -21,16 +21,20 @@ try{
     Rotas.post('/admin/criar/duvidas',adimController.postpaginaCriarDuvidas);
 
     Rotas.get('/admin/criar/projeto',adimController.getPaginaCriarProjeto);
-    Rotas.post('/admin/criar/projeto',uploads.single('image'),adimController.postpaginaCriarProjeto);
+    Rotas.post('/admin/criar/projeto',uploadImg.single('image'),adimController.postpaginaCriarProjeto);
 
     Rotas.get('/admin/ver/duvidas',adimController.paginaVerDuvida);
     Rotas.get('/admin/ver/projetos',adimController.paginaVerProjeto);
  
-    Rotas.get('/admin/editar/duvidas/idDuvida',adimController.getpaginaEditarDuvidas);
-    Rotas.post('/admin/editar/duvidas/idDuvida',adimController.postpaginaEditarDuvidas);
+    Rotas.get('/admin/editar/duvidas/:idDuvida',adimController.getpaginaEditarDuvidas);
+    Rotas.post('/admin/editar/duvidas/:idDuvida',adimController.postpaginaEditarDuvidas);
+   
 
-    Rotas.get('/admin/editar/projetos/:id',adimController.getpaginaEditarProjeto);
-    Rotas.post('/admin/editar/projetos/:id',adimController.postpaginaEditarProjeto);
+    Rotas.get('/admin/deletar/duvidas/:idDuvida',adimController.getdeletarPergunta);
+    Rotas.post('/admin/deletar/duvidas/:idDuvida',adimController.postdeletarPergunta);
+
+    Rotas.get('/admin/editar/projetos/:idProjeto',adimController.getpaginaEditarProjeto);
+    Rotas.post('/admin/editar/projetos/:idProjeto',uploadImg.single('image'),adimController.postpaginaEditarProjeto);
  
     Rotas.post('/admin/logout',adimController.getlogoutAdmin)
     

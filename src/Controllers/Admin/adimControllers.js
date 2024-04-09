@@ -1,6 +1,7 @@
 const session = require("express-session");
-const {MASTEEADIM_DIR, MASTEE_DIR} = require("../../Helpers/constantes");
+const {MASTEEADIM_DIR} = require("../../Helpers/constantes");
 const siteModules= require("../../models/models");
+const { image } = require("pdfkit");
 
 
 let emailAdm="matheus@email.com";
@@ -101,16 +102,17 @@ async function getPaginaCriarProjeto(req, res) {
     
 async function postpaginaCriarProjeto(req, res) {
     try {
-        var [tipo, outro] = [null, null];
 
         if (await siteModules.verTipo()) {
-            [tipo, outro] = await siteModules.verTipo();
+            var [tipo, outro] = await siteModules.verTipo();
         }
         if(!req.body){
             req.flash('info',{msg:'Por favor, forneça tanto a pergunta quanto a resposta.', class:"msgInfo"});
             res.redirect('../criar/projeto');
         }else{
+
             const {nomeProjeto, desProjeto, ntipo } = req.body;
+
         if (!nomeProjeto ){
           
             req.flash('info',{msg:'Por favor, forneça  o nome do projeto !', class:"msgInfo"});
@@ -122,11 +124,13 @@ async function postpaginaCriarProjeto(req, res) {
         }else if(!ntipo){
             req.flash('info',{msg:'Por favor, forneça um tipo para o projeto!', class:"msgInfo"});  
             res.redirect('../criar/projeto');
-        }else{
-            const camminhoImg=req.file.path;
-            await siteModules.criarprojetos(nomeProjeto,desProjeto,camminhoImg,ntipo);
+        }else if (req.file){
+            const camminhoImg=req.file.path.split('src');
+            await siteModules.criarprojetos(nomeProjeto,desProjeto,camminhoImg[1],ntipo);
             res.redirect('../criar/projeto');
-            
+        }else{
+            await siteModules.criarprojetos(nomeProjeto,desProjeto,"semimgagem",ntipo);
+            res.redirect('../criar/projeto');
         }
         
       }
@@ -139,45 +143,137 @@ async function postpaginaCriarProjeto(req, res) {
 }
 
     
+async function getpaginaEditarDuvidas(req,res){
+try{
+    if(!req.params){
 
+    }else{
+        const {idDuvida} = req.params;
+        if(idDuvida){
+            var[dados,m] =  await siteModules.verDuvidaID(idDuvida);
+        }
+    }
+        return res.render('admin/editarPergunta',{
+            layout:MASTEEADIM_DIR,
+            title:"Edita Projeto",
+            pergunta:dados,
+            menssagem: req.flash('editarinfo')
+        
+        
+        })
+}catch{
+    req.flash('info',{msg:'Erro ao cadastrar perguntas:!', class:"msgErro"});
+}
+    
+}
+async function postpaginaEditarDuvidas(req,res){
+    try {
+        const {idDuvida}=req.params;
+        const { pergunta, resposta } = req.body;
 
-function getpaginaEditarDuvidas(req,res){
-   if(!req.params){
+        if(!req.body){
+            req.flash('editarinfo',{msg:'Por favor, forneça tanto a pergunta quanto a resposta.', class:"msgInfo"});
+            res.redirect(`../duvidas/${idDuvida}`);
+        }else if (!pergunta ) {
+            req.flash('editarinfo',{msg:'Por favor, forneça  a pergunta !', class:"msgInfo"});
+            res.redirect(`../duvidas/${idDuvida}`);
+        }else if (!resposta ) {
+            req.flash('editarinfo',{msg:'Por favor, forneça  a resposta!', class:"msgInfo"});
+       
+            res.redirect(`../duvidas/${idDuvida}`);
+        }else {
+
+           await siteModules.editarPergunta(pergunta,resposta,idDuvida);
+           req.flash('editarinfo',{msg:'Duvida editada com sucesso!', class:"msgSucesso"});
+           
+            res.redirect(`../../ver/duvidas`);
+        }
+    } catch (error) {
+        req.flash('editarinfo',{msg:'Erro ao editar perguntas:!', class:"msgErro"});
+        res.redirect('../../ver/duvidas');
+    }
+     
+}
+
+async function getdeletarPergunta(req,res){
+    const {idDuvida}=req.params;
+       if(idDuvida){
+            var[dados,m] =  await siteModules.verDuvidaID(idDuvida);
+        }
+      
+        return res.render('admin/deletarPergunta',{
+            layout:MASTEEADIM_DIR,
+            title:"Edita Projeto",
+            pergunta:dados,
+            menssagem: req.flash('deletarinfo')
+        
+        
+        })
+}
+async function postdeletarPergunta(req,res){
+    const {idDuvida}=req.params;
+    if(idDuvida){
+        await siteModules.deletarPergunta(idDuvida);
+        res.redirect('../../ver/duvidas');
+    }
+       
+}
+
+async function getpaginaEditarProjeto(req,res){
+    const {idProjeto} = req.params;
+    if(idProjeto){
+        var [projeto,filds]= await siteModules.verProjetoID(idProjeto);
+
+    }
   
-   }else{
-    const {idDuvida} = req.params;
-    console.log(idDuvida)
-   }
-    return res.render('admin/editarPergunta',{
-        layout:MASTEEADIM_DIR,
-        title:"Edita Projeto"
-       
-       
-    })
-    
-}
-function postpaginaEditarDuvidas(req,res){
-    
+    if (await siteModules.verTipo()) {
+       var [tipo, outro] = await siteModules.verTipo();
+    }
+   
+    return res.render('admin/editarProjeto', {
+        layout: MASTEEADIM_DIR,
+        title: "Editar Projeto",
+        tipos: tipo,
+        projeto:projeto,
+        menssagem: req.flash('infoEp')
+    });
     
 }
 
-function postpaginaEditarProjeto(req,res){
-    return res.render('admin/editarPergunta',{
-        layout:MASTEEADIM_DIR,
-        title:"criar projeto"
+async function postpaginaEditarProjeto(req,res){
+    try {
+        const {idProjeto}=req.params;
+        const {nomeProjeto, desProjeto } = req.body;
        
-    })
+        if (!nomeProjeto ){
+            req.flash('infoEP',{msg:'Por favor, forneça  o nome do projeto !', class:"msgInfo"});
+            res.redirect(`../projetos/${idProjeto}`);
+            
+        }else if (!desProjeto){
+            req.flash('infoEP',{msg:'Por favor, forneça a descrição do projeto!', class:"msgInfo"});
+     
+            res.redirect(`../projetos/${idProjeto}`);
+        }else if(req.file){
+            const camminhoImg=req.file.path.split('src');
+            await siteModules.editarProjetoImg(nomeProjeto,desProjeto,camminhoImg[1],idProjeto);
+            res.redirect('../../ver/projetos');
+        }
+        else{
+            await siteModules.editarProjeto(nomeProjeto,desProjeto,idProjeto);
+            res.redirect('../../ver/projetos');
+           
+    
+        }
+        
+        
+      } catch (error) {
+        req.flash('info',{msg:'Erro ao cadastrar projeto!', class:"msgInfo"});
+    }
+
     
 }
 
-function getpaginaEditarProjeto(req,res){
-    return res.render('admin/editarPergunta',{
-        layout:MASTEEADIM_DIR,
-        title:"Edita Projeto"
-       
-    })
-    
-}
+
 
 
 async function paginaVerProjeto(req,res){
@@ -195,7 +291,8 @@ async function paginaVerProjeto(req,res){
     return res.render('admin/verProjeto',{
         layout:MASTEEADIM_DIR,
         title:"ver projeto",
-        projetos:projetos
+        projetos:projetos,
+        menssagem: req.flash('editarinfo')
        
     })
     
@@ -269,6 +366,9 @@ module.exports={
 
     getpaginaEditarProjeto,
     postpaginaEditarProjeto,
+
+    getdeletarPergunta,
+    postdeletarPergunta,
 
     getpaginaAdimin,
 
