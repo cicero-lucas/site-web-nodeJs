@@ -3,12 +3,12 @@
         <img src="/img/a1logo_empresa.png" alt="imagem_logo">
     </div>
     <nav>
-        <a href="/">
-            Home
+        <a href="{{url.url}}">
+            home
         </a>
         <a href="#sobre">Sobre nós</a>
-        <a href="/projetos">Nosso projetos</a>
-        <a href="/contato">Fale Conosoco</a>
+        <a href=" {{url.url 'projetos'}}">Nosso projetos</a>
+        <a href="{{url.url 'contato'}}">Fale Conosoco</a>
     </nav>
 
    <div id="celular">
@@ -20,12 +20,12 @@
     </label>
 
     <div id="menuLink">
-        <a href="/">
+        <a href="{{url.url}}">
             Home
         </a>
-        <a href="#sobre">Sobre nós</a>
-        <a href="/projetos">Nosso projetos</a>
-        <a href="/contato">Fale Conosoco</a>
+        <a href="{{url.url '#sobre'}}">Sobre nós</a>
+        <a href="{{url.url 'projetos'}}">Nosso projetos</a>
+        <a href="{{url.url 'contato'}}">Fale Conosoco</a>
     </div>
    </div>
 </div>

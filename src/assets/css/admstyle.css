@@ -410,12 +410,15 @@ div#imgFooter img{
     width: 100%;
 }
 .caixaVer table{
-    width: 100%;
-    margin: 4rem auto;
+    width: 99%;
+    margin: 5rem auto;
     border-collapse: collapse;
     border: 1px solid black;
     padding: 0.2rem;
     border-radius: 10px;
+    z-index: 2;
+    height: 250px;
+    overflow: hidden;
 
 }
 thead th{
@@ -424,7 +427,7 @@ thead th{
 }
 
 tbody td{
-    border: 1px solid black;
+    border: 1.2px solid black;
     padding: 0.3rem;
 }
 
@@ -437,12 +440,9 @@ tbody td.caixabT{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 99%;
 }
 
-tbody td.caixabT a{
-   text-decoration: none;
-   margin: 1px 10px;
-}
 
 tbody td.caixabT a{
    text-decoration: none;
@@ -496,6 +496,9 @@ tbody td.caixabT a{
 }
 
 @media screen and (max-width:420px) {
+    main{
+        width: 100%;
+    }
     .apServicos{
         height: auto;
     }
@@ -503,7 +506,11 @@ tbody td.caixabT a{
     
 }
 @media screen and (min-width:840px) and (max-width:1200px)  {
+    main{
+        width: 99%;
+        margin: auto;
 
+    }
     #logo nav{
         display: none;
     }
@@ -548,8 +555,8 @@ tbody td.caixabT a{
     }
     
     main{
-        margin: 3rem auto;
-        max-width: 100%;
+        margin: 5rem auto;
+        width: 99%;
 
     }
 

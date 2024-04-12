@@ -2,15 +2,22 @@
     <div id="imgLogo">
         <img src="/img/a1logo_empresa.png" alt="imagem_logo">
     </div>
+    
     <nav>
-        <a href="../..//admin">
+        <a href="{{url.url 'admin'}}">
             Home
         </a>
-        <a href="../../admin/criar/duvidas">Criar perguntas </a>
-        <a href="../../admin/criar/projeto">Criar Projeto</a>
-        <a href="../../admin/ver/duvidas">ver Pergunta</a>
-        <a href="../../admin/ver/projetos">ver Projetos</a>
-        <button class="btnSair">Sair</button>
+        <a href="{{url.url 'admin/criar/duvidas'}}">Criar perguntas </a>
+        <a href="{{url.url 'admin/criar/projeto'}}">Criar Projeto</a>
+        <a href="{{url.url 'admin/ver/duvidas'}}">ver Pergunta</a>
+        <a href="{{url.url 'admin/ver/projetos'}}">ver Projetos</a>
+        
+        
+        {{#if  btnv}}
+            <button class="btnSair">Sair</button>
+        {{/if}}
+        
+    
     </nav>
 
    <div id="celular">
@@ -22,14 +29,18 @@
     </label>
 
     <div id="menuLink">
-        <a href="../../admin">
+        <a href="{{url.url 'admin'}}">
             Home
         </a>
-        <a href="../../admin/criar/duvidas">Criar perguntas </a>
-        <a href="../../admin/criar/projeto">Criar Projeto</a>
-        <a href="../../admin/ver/duvidas">ver Pergunta</a>
-        <a href="../../admin/ver/projetos">ver Projetos</a>
-        <button class="btnSair">Sair</button>
+        <a href="{{url.url 'admin/criar/duvidas'}}">Criar perguntas </a>
+        <a href="{{url.url 'admin/criar/projeto'}}">Criar Projeto</a>
+        <a href="{{url.url 'admin/ver/duvidas'}}">ver Pergunta</a>
+        <a href="{{url.url 'admin/ver/projetos'}}">ver Projetos</a>
+        
+        
+        {{#if  btnv}}
+            <button class="btnSair">Sair</button>
+        {{/if}}
     </div>
    </div>
 </div>

@@ -32,14 +32,26 @@ caixaPergunta.forEach((elem,index)=>{
 const btnSair=[...document.querySelectorAll('.btnSair')];
 
 btnSair.map((el)=>{
-        el.addEventListener('click',()=>{
-            fetch('', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ sair: 1 })
-            })
+    el.addEventListener('click', () => {
+        fetch('http://localhost:3000/admin/sair', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sair: 1 })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Logout realizado com sucesso');
+                
+                window.location.reload();
+            } else {
+                console.log('Erro ao fazer logout');
+            }
+        })
+    
+
+    
     })
 })
 

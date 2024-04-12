@@ -1,11 +1,13 @@
 const { MASTEE_DIR } = require("../../Helpers/constantes");
-const siteModules= require("../../models/models")
+const siteModules= require("../../models/models");
+const url = require("../../Helpers/Helpers");
 
 const Home = (req,res)=>{
     return res.render('home',
     {
         layout:MASTEE_DIR,
-        title:"MAtheus"
+        title:"loja",
+        url:url
     }
     );
 }
@@ -21,8 +23,8 @@ const Projetos = async (req,res)=>{
     {
         layout:MASTEE_DIR,
         title:"Nossos Projetos",
-        projetos:projetos
-
+        projetos:projetos,
+        url:url
     }
     );
     }catch{
@@ -34,7 +36,8 @@ const Contato = (req,res)=>{
     return res.render('contato',
     {
         layout:MASTEE_DIR,
-        title:"M2"
+        title:"M2",
+        url:url
     }
     );
 }
@@ -42,7 +45,8 @@ const erro= (req,res)=>{
     return res.render('erro',
     {
         layout:MASTEE_DIR,
-        title:"pagina não encontrada"
+        title:"pagina não encontrada",
+        url:url
     }
     );
 }
