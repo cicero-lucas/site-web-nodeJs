@@ -9,6 +9,7 @@ let emailAdm="matheus@email.com";
 let senhaAdm="1";
 const secret = process.env.SECRET;
 
+// loguir
 
 function getadimLogin(req,res){
     let btnv = false
@@ -51,6 +52,7 @@ async function postadimLogin(req, res) {
 }
 
 
+// loguirpagina
 
 function getpaginaAdimin(req,res){
     let btnv = true
@@ -76,7 +78,7 @@ async function getpaginaCriarDuvidas(req, res) {
 
 }
 
-
+// ceiar Duvidas
 
 async function postpaginaCriarDuvidas(req, res) {
         try {
@@ -220,27 +222,82 @@ async function postpaginaEditarDuvidas(req,res){
 }
 
 
+async function getdeletarPergunta(req,res){
+    const {idDuvida}=req.params;
+       if(idDuvida){
+            var[dados,m] =  await siteModules.verDuvidaID(idDuvida);
+        }
+      
+        return res.render('admin/deletarPergunta',{
+            layout:MASTEEADIM_DIR,
+            title:"Edita Projeto",
+            pergunta:dados,
+            menssagem: req.flash('deletarinfo')
+        
+        
+        })
+}
 
-
-function postpaginaEditarProjeto(req,res){
-    
-    return res.render('admin/editarPergunta',{
-        layout:MASTEEADIM_DIR,
-        title:"criar projeto",
-        url:url
+async function postdeletarPergunta(req,res){
+    const {idDuvida}=req.params;
+    if(idDuvida){
+        await siteModules.deletarPergunta(idDuvida);
+        res.redirect('../../ver/duvidas');
+    }
        
-    })
+}
+
+async function getpaginaEditarProjeto(req,res){
+    const {idProjeto} = req.params;
+    if(idProjeto){
+        var [projeto,filds]= await siteModules.verProjetoID(idProjeto);
+
+    }
+  
+    if (await siteModules.verTipo()) {
+       var [tipo, outro] = await siteModules.verTipo();
+    }
+   
+    return res.render('admin/editarProjeto', {
+        layout: MASTEEADIM_DIR,
+        title: "Editar Projeto",
+        tipos: tipo,
+        projeto:projeto,
+        menssagem: req.flash('infoEp')
+    });
     
 }
 
-function getpaginaEditarProjeto(req,res){
-    let btnv =true
-    return res.render('admin/editarProjeto',{
-        layout:MASTEEADIM_DIR,
-        title:"Edita Projeto",
-        url:url,
-        btnv:btnv
-    })
+async function postpaginaEditarProjeto(req,res){
+    try {
+        const {idProjeto}=req.params;
+        const {nomeProjeto, desProjeto } = req.body;
+       
+        if (!nomeProjeto ){
+            req.flash('infoEP',{msg:'Por favor, forneça  o nome do projeto !', class:"msgInfo"});
+            res.redirect(`../projetos/${idProjeto}`);
+            
+        }else if (!desProjeto){
+            req.flash('infoEP',{msg:'Por favor, forneça a descrição do projeto!', class:"msgInfo"});
+     
+            res.redirect(`../projetos/${idProjeto}`);
+        }else if(req.file){
+            const camminhoImg=req.file.path.split('src');
+            await siteModules.editarProjetoImg(nomeProjeto,desProjeto,camminhoImg[1],idProjeto);
+            res.redirect('../../ver/projetos');
+        }
+        else{
+            await siteModules.editarProjeto(nomeProjeto,desProjeto,idProjeto);
+            res.redirect('../../ver/projetos');
+           
+    
+        }
+        
+        
+      } catch (error) {
+        req.flash('info',{msg:'Erro ao cadastrar projeto!', class:"msgInfo"});
+    }
+
     
 }
 
@@ -319,6 +376,8 @@ module.exports={
     getpaginaEditarProjeto,
     postpaginaEditarProjeto,
 
+    getdeletarPergunta,
+    postdeletarPergunta,
   
 
     getpaginaAdimin,
@@ -329,3 +388,9 @@ module.exports={
     postlogoutAdmin
   
 }
+
+
+
+
+
+
