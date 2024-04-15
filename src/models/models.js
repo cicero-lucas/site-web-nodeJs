@@ -1,5 +1,21 @@
 const connection = require('../database/dbConexao');
 
+async function buscarUsuario(email,senha){
+    try {
+        const query ="SELECT * FROM tb_user_admin WHERE emeil_user = ? and senha_user = ?;"
+        const stmt = await connection.execute(query,[email,senha])
+
+        if (stmt){
+            return stmt
+        }else{
+            return "erro"
+        }
+        
+    } catch{
+        console.log("erro!");
+    }
+}
+
 async function verProjeto(){
     try{
         const query="SELECT tbp.id_projeto, tbp.nome_projeto,tbp.data_projeto,tbp.c_img,tbp.descricao_projeto,tbtp.tipo_p FROM tb_projetos tbp, tb_tipo_projeto tbtp WHERE tbp.fk_tipo = tbtp.id_tipo;";
@@ -133,6 +149,7 @@ async function deletarProjeto(idProjeto){
 }
 
 module.exports={
+    buscarUsuario,
     verDuvidasF,
     verProjeto,
     criarPergunta,

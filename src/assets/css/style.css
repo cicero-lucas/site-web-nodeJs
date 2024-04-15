@@ -202,6 +202,8 @@ section#caixaApresetacao,section#caixaApresetacaoC{
 
 }
 
+/* sobre */
+
 #sobre{
     margin: 2rem auto;
     width: 96%;
@@ -232,6 +234,8 @@ section#caixaApresetacao,section#caixaApresetacaoC{
 .primeiro{
     text-indent: 3em;
 }
+
+/* projetos */
 
 #caixaInformacao{
     margin: 1rem auto;
@@ -266,6 +270,8 @@ section#caixaApresetacao,section#caixaApresetacaoC{
    font-size: 17px;
 }
 
+/* Duvidas Frequentes */
+
 #caixaDfrequentes{
     width: 80%;
     margin: 2rem auto;
@@ -296,7 +302,7 @@ section#caixaApresetacao,section#caixaApresetacaoC{
     background-color: var(--principal);
     padding: 0.8rem;
     border-radius: 10px;
-    margin: 0.5rem auto;
+    margin: 0.8rem auto;
     text-align: center;
     cursor: pointer;
     transition: 1s ease-in-out;
@@ -329,7 +335,7 @@ section#caixaApresetacao,section#caixaApresetacaoC{
     height: 100px;
     font-weight: 600;
     text-align: justify;
-    margin: 0.2rem 1rem;
+    margin: 0.6rem 0.9rem;
     padding: 1rem;
     border-radius: 5px;
     line-height: 1.2;
@@ -454,6 +460,7 @@ div#imgFooter img{
     padding: 2rem;
     background-color: var(--principal);
     margin: auto;
+    border-radius: 8px;
 }
 
 #contatoB #tel, #contatoB #email {

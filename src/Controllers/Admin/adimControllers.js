@@ -4,50 +4,66 @@ const {MASTEEADIM_DIR} = require("../../Helpers/constantes");
 const siteModules= require("../../models/models");
 const url = require("../../Helpers/Helpers")
 const imagemD = require('../../Helpers/UpdateArquivo');
-
-
-let emailAdm="matheus@email.com";
-let senhaAdm="1";
 const secret = process.env.SECRET;
 
 // login
 
 function getadimLogin(req,res){
-    let btnv = false
-    return res.render('admin/adminLogin',{
-        layout:MASTEEADIM_DIR,
-        title:"Pagina Login",
-        menssagem: req.flash('info'),
-        btnv:btnv,
-        url:url
-    });
+    try{
+        let btnv = false
+        return res.render('admin/adminLogin',{
+            layout:MASTEEADIM_DIR,
+            title:"Pagina Login",
+            menssagem: req.flash('info'),
+            btnv:btnv,
+            url:url
+        });
+    }catch{
+
+    }
    
 }
 
 async function postadimLogin(req, res) {
-    const { email, senha } = req.body;
+   try{
+        const { email, senha } = req.body;
 
-    if (!email) {
-        req.flash('info', { msg: 'Coloque seu email!', class: "msgInfo" });
-        return res.redirect(url.url('admin'));
-    } else if (!senha) {
-        req.flash('info', { msg: 'Coloque a senha!', class: "msgInfo" });
-        return res.redirect(url.url('admin'));
-    } else if (emailAdm == email && senhaAdm == senha) {
-        try {
-            const token = jwt.sign({ idusuario: emailAdm }, secret);
-            req.flash('info', { msg: 'bem vindo', class: "msgInfo" });
-            res.cookie('tokenAutorization', token);
-            return res.redirect(url.url('admin/pagina'));
-              
-            
-        } catch (error) {
-            req.flash('info', { msg: 'Erro ao fazer login', class: "msgErro" });
+        if (!email) {
+            req.flash('info', { msg: 'Coloque seu email!', class: "msgInfo" });
             return res.redirect(url.url('admin'));
-        }
+        } else if (!senha) {
+            req.flash('info', { msg: 'Coloque a senha!', class: "msgInfo" });
+            return res.redirect(url.url('admin'));
+        } else {
+            try {
+            const [usuario,dados]= await siteModules.buscarUsuario(email,senha);
+            if(usuario=="" || !usuario || usuario==undefined){
+                req.flash('info', { msg: 'Erro ao fazer login', class: "msgErro" });
+                res.clearCookie('tokenAutorization');
+                return res.redirect(url.url('admin'));
 
-    } else {
-        req.flash('info', { msg: 'Email ou senha incorretos!', class: "msgErro" });
+            }else{
+                const tempoExpiracao = 15 * 60 * 1000; 
+                const tempoExpiracaoData = new Date(Date.now() + tempoExpiracao);
+                
+                const token = jwt.sign({ idusuario: usuario[0].id_user }, secret);
+                res.cookie('tokenAutorization', token, {
+                    expires: tempoExpiracaoData,
+                    httpOnly: true 
+                });
+                return res.redirect(url.url('admin/pagina'));
+
+            }
+                
+            } catch (error) {
+                req.flash('info', { msg: 'Erro ao fazer Login', class: "msgErro" });
+                return res.redirect(url.url('admin'));
+            }
+            
+
+        }
+    }catch{
+        req.flash('info', { msg: 'Erro ao fazer Login', class: "msgErro" });
         return res.redirect(url.url('admin'));
     }
 }
@@ -56,26 +72,35 @@ async function postadimLogin(req, res) {
 // loguirpagina
 
 function getpaginaAdimin(req,res){
-    let btnv = true
-    return res.render('admin/adminPrincipal',{
-        layout:MASTEEADIM_DIR,
-        title:"Pagina Administrador",
-        url:url,
-        btnv:btnv,
-       
-    })
+    try{
+        let btnv = true
+        return res.render('admin/adminPrincipal',{
+            layout:MASTEEADIM_DIR,
+            title:"Pagina Administrador",
+            url:url,
+            btnv:btnv,
+        
+        })
+    }catch{
+
+    }
     
 }
 
 async function getpaginaCriarDuvidas(req, res) {
-    let btnv = true
-    return res.render('admin/criarPergunta', {
-        layout: MASTEEADIM_DIR,
-        title: "Criar Pergunta",
-        menssagem: req.flash('info'),
-        url:url,
-        btnv:btnv,
-    });
+
+    try{
+        let btnv = true
+        return res.render('admin/criarPergunta', {
+            layout: MASTEEADIM_DIR,
+            title: "Criar Pergunta",
+            menssagem: req.flash('info'),
+            url:url,
+            btnv:btnv,
+        });
+    }catch{
+
+    }
 
 }
 
@@ -110,30 +135,26 @@ async function postpaginaCriarDuvidas(req, res) {
 
 
 async function getPaginaCriarProjeto(req, res) {
-    let btnv = true
-    var [tipo, outro] = [null, null];
-    
-    if (await siteModules.verTipo()) {
-        [tipo, outro] = await siteModules.verTipo();
+    try{ 
+        let btnv = true
+        const [tipo, outro] = await siteModules.verTipo();
+        return res.render('admin/criarProjeto', {
+            layout: MASTEEADIM_DIR,
+            title: "Criar Projeto",
+            tipos: tipo,
+            menssagem: req.flash('info'),
+            url:url,
+            btnv:btnv
+        });
+    }catch{
+
     }
-    return res.render('admin/criarProjeto', {
-        layout: MASTEEADIM_DIR,
-        title: "Criar Projeto",
-        tipos: tipo,
-        menssagem: req.flash('info'),
-        url:url,
-        btnv:btnv
-    });
 }
 
     
 async function postpaginaCriarProjeto(req, res) {
     try {
-        var [tipo, outro] = [null, null];
-
-        if (await siteModules.verTipo()) {
-            [tipo, outro] = await siteModules.verTipo();
-        }
+    
         if(!req.body){
             req.flash('info',{msg:'Por favor, forneça tanto a pergunta quanto a resposta.', class:"msgInfo"});
             res.redirect(url.url('admin/criar/projeto'));
@@ -151,8 +172,12 @@ async function postpaginaCriarProjeto(req, res) {
             req.flash('info',{msg:'Por favor, forneça um tipo para o projeto!', class:"msgInfo"});  
             res.redirect(url.url('admin/criar/projeto'));
         }else{
-            const camminhoImg=req.file.path;
+            const camminhoImg=""
+            if(req.file){
+                camminhoImg=req.file.path;
+            }
             await siteModules.criarprojetos(nomeProjeto,desProjeto,camminhoImg,ntipo);
+            req.flash('info',{msg:'projeto cadastrado com sucesso!', class:"msgSucesso"});  
             res.redirect(url.url('admin/criar/projeto'));
             
         }
@@ -180,7 +205,7 @@ try{
     }
         return res.render('admin/editarPergunta',{
             layout:MASTEEADIM_DIR,
-            title:"Edita Projeto",
+            title:"Editar Projeto",
             pergunta:dados,
             menssagem: req.flash('editarinfo'),
             url:url,
@@ -232,7 +257,7 @@ try{
       
         return res.render('admin/deletarPergunta',{
             layout:MASTEEADIM_DIR,
-            title:"Edita Projeto",
+            title:"Deletar Projeto",
             pergunta:dados,
             url:url,
             menssagem: req.flash('deletarinfo')
@@ -258,20 +283,23 @@ async function postdeletarPergunta(req,res){
 }
 
 async function getpaginaEditarProjeto(req,res){
-    const {idProjeto} = req.params;
-    const [projeto,filds]= await siteModules.verProjetoID(idProjeto);
-    if (await siteModules.verTipo()) {
-       var [tipo, outro] = await siteModules.verTipo();
+    try{
+        const btnv=true;
+        const {idProjeto} = req.params;
+        const [projeto,filds]= await siteModules.verProjetoID(idProjeto);
+        const [tipo, outro] = await siteModules.verTipo();
+        return res.render('admin/editarProjeto', {
+            layout: MASTEEADIM_DIR,
+            title: "Editar Projeto",
+            tipos: tipo,
+            projeto:projeto,
+            url:url,
+            btnv:btnv,
+            menssagem: req.flash('infoEp')
+        });
+    }catch{
+
     }
-   
-    return res.render('admin/editarProjeto', {
-        layout: MASTEEADIM_DIR,
-        title: "Editar Projeto",
-        tipos: tipo,
-        projeto:projeto,
-        url:url,
-        menssagem: req.flash('infoEp')
-    });
     
 }
 
@@ -281,23 +309,22 @@ async function postpaginaEditarProjeto(req,res){
         const {nomeProjeto, desProjeto } = req.body;
         if (!nomeProjeto ){
             req.flash('infoEP',{msg:'Por favor, forneça  o nome do projeto !', class:"msgInfo"});
-            res.redirect(`../projetos/${idProjeto}`);
+            res.redirect(url.url(`editar/projeto/${idProjeto}`));
             
         }else if (!desProjeto){
             req.flash('infoEP',{msg:'Por favor, forneça a descrição do projeto!', class:"msgInfo"});
-     
-            res.redirect(`../projetos/${idProjeto}`);
+            res.redirect(url.url(`editar/projeto/${idProjeto}`));
         }else if(req.file){
             const [projeto,filds]= await siteModules.verProjetoID(idProjeto);
             const camminhoImg=req.file.path.split('src');
             imagemD.apagarImagem(projeto[0].c_img);
             await siteModules.editarProjetoImg(nomeProjeto,desProjeto,camminhoImg[1],idProjeto);
             
-            res.redirect('../../ver/projetos');
+            res.redirect(url.url(`editar/projeto/${idProjeto}`));
         }
         else{
             await siteModules.editarProjeto(nomeProjeto,desProjeto,idProjeto);
-            res.redirect('../../ver/projetos');
+            res.redirect(url.url(`ver/projetos`));
            
     
         }
@@ -313,14 +340,16 @@ async function postpaginaEditarProjeto(req,res){
 
 async function getdeletarProjeto(req,res){
     try{
+        const btnv=true
         const {idProjeto}=req.params; 
         const[dados,m] =  await siteModules.verProjetoID(idProjeto);
         return res.render('admin/deletarProjeto',{
             layout:MASTEEADIM_DIR,
-            title:"EditarPrjeto",
+            title:"Deletar Prjeto",
             projeto:dados,
             url:url,
-            menssagem: req.flash('deletarinfo')
+            menssagem: req.flash('deletarinfo'),
+            btnv:btnv
         
         
         })
@@ -348,27 +377,22 @@ async function getdeletarProjeto(req,res){
 
 
 async function paginaVerProjeto(req,res){
-    let btnv =true
     try{
-        var [projetos,outro]=[null,null];
-        
-        if(await siteModules.verProjeto()){
-            var [projetos,outro]= await siteModules.verProjeto();
-        }
+        let btnv =true
+        const [projetos,outro]= await siteModules.verProjeto();
 
-    
+        return res.render('admin/verProjeto',{
+            layout:MASTEEADIM_DIR,
+            title:"ver projetos",
+            projetos:projetos,
+            menssagem: req.flash('editarinfo'),
+            url:url,
+            btnv:btnv
+        
+        })
     }catch{
         console.log("erro! projeto");
     }
-    return res.render('admin/verProjeto',{
-        layout:MASTEEADIM_DIR,
-        title:"ver projeto",
-        projetos:projetos,
-        menssagem: req.flash('editarinfo'),
-        url:url,
-        btnv:btnv
-       
-    })
     
 }
 async function paginaVerDuvida(req,res){
@@ -395,12 +419,16 @@ async function paginaVerDuvida(req,res){
 }
 
 function postlogoutAdmin(req, res) {
-    const {sair} =req.body
-    if(sair ==1  && req.cookies['tokenAutorization']){
-        res.clearCookie('tokenAutorization');
-        res.status(200).send('Logout realizado com sucesso');
-    }else{
-        res.redirect(url.url(`admin`));
+    try{
+        const {sair} =req.body
+        if(sair ==1  && req.cookies['tokenAutorization']){
+            res.clearCookie('tokenAutorization');
+            res.status(200).send('Logout realizado com sucesso');
+        }else{
+            res.redirect(url.url(`admin`));
+        }
+    }catch{
+
     }
 }
 
