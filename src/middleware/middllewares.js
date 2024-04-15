@@ -6,9 +6,7 @@ const secret = process.env.SECRET;
 async function verificarLogin(req, res, next) {
     const headerToken = req.cookies['tokenAutorization'];
     const token= (headerToken)
-    console.log(token)
-
-
+    
     if (!token) {
         req.flash('info', { msg: 'Você precisa fazer login para acessar esta página!', class: "msgErro" });
         return res.redirect(url(`admin`));

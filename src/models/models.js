@@ -123,6 +123,13 @@ async function editarProjetoImg(nomep,descricoaP,imgP,idP){
     } catch(erro){
         return "erro! ao editar pergunta!"
     }
+
+}
+
+async function deletarProjeto(idProjeto){
+    const query= "DELETE FROM tb_projetos WHERE id_projeto = ?;";
+
+    const stmt = connection.query(query,[idProjeto]);
 }
 
 module.exports={
@@ -136,6 +143,7 @@ module.exports={
     editarPergunta,
     deletarPergunta,
     editarProjeto,
-    editarProjetoImg
+    editarProjetoImg,
+    deletarProjeto,
 }
 

@@ -9,7 +9,7 @@
     {{#each pergunta}}
     <form   method="post">  
             <div class="campos">
-                <p class="tituloF" style="background-color: rgba(255, 0, 0, 0.311);">Editar Pergunta de numero {{id_duvida}}!</p>
+                <p class="tituloF  deletarDados">Deletar Pergunta de numero {{id_duvida}}!</p>
             </div>
             <div class="campos">
                 <input type="text" placeholder="Digite sua pergunta:" name="pergunta" value="{{m_pergunta}}">
@@ -18,7 +18,7 @@
                 <textarea name="resposta" id="resposta" cols="30" rows="10" placeholder="Digite sua resposta:" > {{m_resposta}}</textarea >
             </div>
             <div class="campos">
-                <button class="btnC" style="background-color: rgba(255, 0, 0, 0.458);">deletar</button>
+                <button class="btnC deletarDados" >deletar</button>
             </div> 
     </form>
  {{/each}}

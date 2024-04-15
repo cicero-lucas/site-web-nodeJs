@@ -23,4 +23,14 @@ const uploadImg = multer({
 
 
 
-module.exports = { uploadImg };
+
+function apagarImagem(caminhoDaImagem) {
+    
+    if (fs.existsSync(caminhoDaImagem)) {
+        
+        fs.unlinkSync(caminhoDaImagem);
+    }
+}
+
+
+module.exports = { uploadImg, apagarImagem };

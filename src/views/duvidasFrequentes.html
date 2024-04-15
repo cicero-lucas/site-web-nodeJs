@@ -1,0 +1,39 @@
+<div class="tituloSobre">
+    <h5>Duvidas Frequentes</h5>
+</div>
+
+<section id="caixaDfrequentes">
+    <div id="caixaImgd">
+        <img src="/img/duvids.png" alt="">
+    </div>
+
+    <div id="caixaDuvidas">
+        {{#each duvidas}}
+            <div class="duvidasFequentes">
+                <div class="caixaPergunta">
+                    <p class="pergunta">
+                        {{m_pergunta}}
+                    </p>
+                    <p class="material-symbols-outlined seta">
+                        expand_more
+                    </p>
+                </div>
+
+                <div class="caixaResposta caixaFechada">
+                    <p class="resposta ">
+                        {{m_resposta}}
+                    </p>
+
+                </div>
+            </div>
+        {{/each}}
+ 
+        <div id="btnDfrequentes">
+            <a href="{{url.url }}">
+                <button >Voltar!</button>
+            </a>
+
+        </div>
+
+    </div>
+</section>

@@ -3,30 +3,30 @@
     <table>
         <thead>
             <tr>
-                <th style="width: 30%;">Titulo Projeto</th>
-                <th style="width: 30%;">Descrição</th>
+                <th style="width: 20%;">Titulo Projeto</th>
+                <th style="width: 20%;">Descrição</th>
                 <th style="width: 20%;">Tipo</th>
-                <th style="width: 20%;">Ação</th>
+                <th style="width: 15%;">Ação</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>{{nome_projeto}}</td>
-                <td>{{descricao_projeto}}</td>
+                <td style="overflow: hidden;">{{descricao_projeto}}</td>
                 <td>
                     <select name="tipo" id="tipo">
                         <option value="tipo" disabled selected> {{tipo_p}}</option>
                     </select>
-            </td>
+                 </td>
                 <td class="caixabT">
-                    <a href="/admin/editar/projetos/{{id_projeto}}">
+                    <a href="/admin/editar/projeto/{{id_projeto}}">
                         <button class="btnE">
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
                         </button>
                     </a>
-                    <a href="/admin/deletar/projetos/{{id_projeto}}">
+                    <a href="/admin/deletar/projeto/{{id_projeto}}">
                         <button class="btnD">
                             <span class="material-symbols-outlined">
                             delete

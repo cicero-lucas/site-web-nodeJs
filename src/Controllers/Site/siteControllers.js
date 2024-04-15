@@ -11,6 +11,7 @@ const Home = (req,res)=>{
     }
     );
 }
+
 const Projetos = async (req,res)=>{
     try{
         var [projetos,outro]=[null,null];
@@ -32,6 +33,7 @@ const Projetos = async (req,res)=>{
     }
     
 }
+
 const Contato = (req,res)=>{
     return res.render('contato',
     {
@@ -41,19 +43,42 @@ const Contato = (req,res)=>{
     }
     );
 }
-const erro= (req,res)=>{
-    return res.render('erro',
-    {
+
+const paginaErro=(req,res)=>{
+    try{
+        return res.render('erro',
+        {
         layout:MASTEE_DIR,
         title:"pagina não encontrada",
         url:url
-    }
+        }
     );
+    }catch{
+
+    }
+    
+}
+
+const paginaDuvidasfrequentes = async (req,res)=>{
+    try{
+        const [duvidas,dados]= await  siteModules.verDuvidasF();
+        return res.render('duvidasFrequentes',{
+            layout:MASTEE_DIR,
+            title:'Duvidas Frequentes',
+            duvidas:duvidas,
+            url:url
+        });
+    }catch{
+
+    }
+    
+
 }
 
 module.exports={
     Home,
     Contato,
     Projetos,
-    erro
+    paginaErro,
+    paginaDuvidasfrequentes
 }

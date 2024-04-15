@@ -3,13 +3,14 @@ const jwt = require('jsonwebtoken');
 const {MASTEEADIM_DIR} = require("../../Helpers/constantes");
 const siteModules= require("../../models/models");
 const url = require("../../Helpers/Helpers")
+const imagemD = require('../../Helpers/UpdateArquivo');
 
 
 let emailAdm="matheus@email.com";
 let senhaAdm="1";
 const secret = process.env.SECRET;
 
-// loguir
+// login
 
 function getadimLogin(req,res){
     let btnv = false
@@ -223,6 +224,7 @@ async function postpaginaEditarDuvidas(req,res){
 
 
 async function getdeletarPergunta(req,res){
+try{
     const {idDuvida}=req.params;
        if(idDuvida){
             var[dados,m] =  await siteModules.verDuvidaID(idDuvida);
@@ -232,28 +234,32 @@ async function getdeletarPergunta(req,res){
             layout:MASTEEADIM_DIR,
             title:"Edita Projeto",
             pergunta:dados,
+            url:url,
             menssagem: req.flash('deletarinfo')
         
         
         })
+    }catch{
+
+    }
 }
 
 async function postdeletarPergunta(req,res){
-    const {idDuvida}=req.params;
-    if(idDuvida){
-        await siteModules.deletarPergunta(idDuvida);
-        res.redirect('../../ver/duvidas');
+    try{
+        const {idDuvida}=req.params;
+        if(idDuvida){
+            await siteModules.deletarPergunta(idDuvida);
+            res.redirect(url.url(`admin/ver/duvidas`));
+        }
+    }catch{
+
     }
        
 }
 
 async function getpaginaEditarProjeto(req,res){
     const {idProjeto} = req.params;
-    if(idProjeto){
-        var [projeto,filds]= await siteModules.verProjetoID(idProjeto);
-
-    }
-  
+    const [projeto,filds]= await siteModules.verProjetoID(idProjeto);
     if (await siteModules.verTipo()) {
        var [tipo, outro] = await siteModules.verTipo();
     }
@@ -263,6 +269,7 @@ async function getpaginaEditarProjeto(req,res){
         title: "Editar Projeto",
         tipos: tipo,
         projeto:projeto,
+        url:url,
         menssagem: req.flash('infoEp')
     });
     
@@ -272,7 +279,6 @@ async function postpaginaEditarProjeto(req,res){
     try {
         const {idProjeto}=req.params;
         const {nomeProjeto, desProjeto } = req.body;
-       
         if (!nomeProjeto ){
             req.flash('infoEP',{msg:'Por favor, forneça  o nome do projeto !', class:"msgInfo"});
             res.redirect(`../projetos/${idProjeto}`);
@@ -282,8 +288,11 @@ async function postpaginaEditarProjeto(req,res){
      
             res.redirect(`../projetos/${idProjeto}`);
         }else if(req.file){
+            const [projeto,filds]= await siteModules.verProjetoID(idProjeto);
             const camminhoImg=req.file.path.split('src');
+            imagemD.apagarImagem(projeto[0].c_img);
             await siteModules.editarProjetoImg(nomeProjeto,desProjeto,camminhoImg[1],idProjeto);
+            
             res.redirect('../../ver/projetos');
         }
         else{
@@ -300,6 +309,42 @@ async function postpaginaEditarProjeto(req,res){
 
     
 }
+
+
+async function getdeletarProjeto(req,res){
+    try{
+        const {idProjeto}=req.params; 
+        const[dados,m] =  await siteModules.verProjetoID(idProjeto);
+        return res.render('admin/deletarProjeto',{
+            layout:MASTEEADIM_DIR,
+            title:"EditarPrjeto",
+            projeto:dados,
+            url:url,
+            menssagem: req.flash('deletarinfo')
+        
+        
+        })
+        }catch{
+    
+        }
+    }
+    
+    async function postdeletarProjeto(req,res){
+        try{
+            const {idProjeto}=req.params;
+            const[dados,m] =  await siteModules.verProjetoID(idProjeto);
+            if(idProjeto){
+                imagemD.apagarImagem(dados[0].c_img);
+                await siteModules.deletarProjeto(idProjeto)
+                res.redirect(url.url(`admin/ver/projetos`));
+
+                
+            }
+        }catch{
+            
+        }
+           
+    }
 
 
 async function paginaVerProjeto(req,res){
@@ -379,6 +424,8 @@ module.exports={
     getdeletarPergunta,
     postdeletarPergunta,
   
+    getdeletarProjeto,
+    postdeletarProjeto,
 
     getpaginaAdimin,
 
