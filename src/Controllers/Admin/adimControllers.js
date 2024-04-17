@@ -93,7 +93,7 @@ async function getpaginaCriarDuvidas(req, res) {
         let btnv = true
         return res.render('admin/criarPergunta', {
             layout: MASTEEADIM_DIR,
-            title: "Criar Pergunta",
+            title: "Criar Duvidas",
             menssagem: req.flash('info'),
             url:url,
             btnv:btnv,

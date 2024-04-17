@@ -6,7 +6,7 @@ const Home = (req,res)=>{
     return res.render('home',
     {
         layout:MASTEE_DIR,
-        title:"loja",
+        title:"M&N Soluções Digitais",
         url:url
     }
     );
@@ -38,7 +38,7 @@ const Contato = (req,res)=>{
     return res.render('contato',
     {
         layout:MASTEE_DIR,
-        title:"M2",
+        title:"Fale conosco",
         url:url
     }
     );
