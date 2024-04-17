@@ -38,8 +38,6 @@ app.use(cors({
     allowedHeaders: ['Content-Type'] 
 }));
 
-
-
 app.use(Rotas);
 
 templeteSite(app);
