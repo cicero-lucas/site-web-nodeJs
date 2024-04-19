@@ -6,7 +6,7 @@ const url = require("../../Helpers/Helpers")
 const imagemD = require('../../Helpers/UpdateArquivo');
 const secret = process.env.SECRET;
 
-// login
+// pagina login
 
 function getadimLogin(req,res){
     try{
@@ -27,7 +27,7 @@ function getadimLogin(req,res){
 async function postadimLogin(req, res) {
    try{
         const { email, senha } = req.body;
-
+        
         if (!email) {
             req.flash('info', { msg: 'Coloque seu email!', class: "msgInfo" });
             return res.redirect(url.url('admin'));
@@ -37,6 +37,7 @@ async function postadimLogin(req, res) {
         } else {
             try {
             const [usuario,dados]= await siteModules.buscarUsuario(email,senha);
+            
             if(usuario=="" || !usuario || usuario==undefined){
                 req.flash('info', { msg: 'Erro ao fazer login', class: "msgErro" });
                 res.clearCookie('tokenAutorization');
@@ -172,7 +173,8 @@ async function postpaginaCriarProjeto(req, res) {
             req.flash('info',{msg:'Por favor, forneça um tipo para o projeto!', class:"msgInfo"});  
             res.redirect(url.url('admin/criar/projeto'));
         }else{
-            const camminhoImg=""
+            let camminhoImg=""
+            
             if(req.file){
                 camminhoImg=req.file.path;
             }
@@ -184,6 +186,7 @@ async function postpaginaCriarProjeto(req, res) {
       }
  
     } catch (error) {
+
         req.flash('info',{msg:'Erro ao cadastrar projeto!', class:"msgInfo"});
         res.redirect(url.url('admin/criar/projeto'));
     }
