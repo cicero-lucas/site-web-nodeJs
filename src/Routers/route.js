@@ -5,7 +5,6 @@ const middleware = require("../middleware/middllewares")
 const { uploadImg } = require('../Helpers/UpdateArquivo');
 const Rotas = express.Router();
 
-
 try{
     Rotas.get('/',siteController.Home);
     Rotas.get('/projetos',siteController.Projetos);
