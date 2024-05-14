@@ -21,9 +21,6 @@ const uploadImg = multer({
     }
 });
 
-
-
-
 function apagarImagem(caminhoDaImagem) {
     
     if (fs.existsSync(caminhoDaImagem)) {
@@ -34,3 +31,6 @@ function apagarImagem(caminhoDaImagem) {
 
 
 module.exports = { uploadImg, apagarImagem };
+
+
+

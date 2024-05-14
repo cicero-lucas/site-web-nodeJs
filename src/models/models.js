@@ -108,6 +108,7 @@ async function editarPergunta(pergunta,resposta,id_pergunta){
         return "erro! ao editar pergunta!"
     }
 }
+
 async function deletarPergunta(id_pergunta){
     try {
         const query= "DELETE FROM tb_duvidasfrequentes WHERE id_duvida = ?;";
@@ -130,6 +131,7 @@ async function editarProjeto(nomep,descricoaP,idP){
         return "erro! ao editar pergunta!"
     }
 }
+
 async function editarProjetoImg(nomep,descricoaP,imgP,idP){
     try {
         const query= "UPDATE tb_projetos SET nome_projeto = ?, descricao_projeto = ? c_img = ? WHERE id_projeto = ?";

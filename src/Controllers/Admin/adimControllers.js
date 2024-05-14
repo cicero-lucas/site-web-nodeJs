@@ -328,11 +328,8 @@ async function postpaginaEditarProjeto(req,res){
         else{
             await siteModules.editarProjeto(nomeProjeto,desProjeto,idProjeto);
             res.redirect(url.url(`ver/projetos`));
-           
-    
         }
-        
-        
+
       } catch (error) {
         req.flash('info',{msg:'Erro ao cadastrar projeto!', class:"msgInfo"});
     }

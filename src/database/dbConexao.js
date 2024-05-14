@@ -10,3 +10,6 @@ const connection = conexao.createPool({
 })
 
 module.exports=connection;
+
+
+

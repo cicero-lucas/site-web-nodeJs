@@ -16,7 +16,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,9 +23,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-
 app.use(flash());
-
 
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(express.static(path.join(__dirname))); 

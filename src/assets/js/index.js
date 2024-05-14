@@ -28,6 +28,7 @@ caixaPergunta.forEach((elem,index)=>{
 
 });
 
+
 // Admin
 const btnSair=[...document.querySelectorAll('.btnSair')];
 

@@ -106,11 +106,13 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+
 #menuLink > a{
     display: block;
     margin: 1rem;
     padding: 0.2rem;
 }
+
 #menuLink > a:hover{
     color: var(--principal);
     border-bottom: 2px solid var(--principal);

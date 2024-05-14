@@ -25,4 +25,5 @@ async function verificarLogin(req, res, next) {
 
 }
 
+
 module.exports = { verificarLogin };

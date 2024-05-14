@@ -4,4 +4,5 @@ package-lock.json
 src/doc.txt
 src/assets/server
 src/public
+assets/server
 

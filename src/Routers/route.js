@@ -41,7 +41,7 @@ try{
 
     Rotas.get('/admin/deletar/projeto/:idProjeto',middleware.verificarLogin,adimController.getdeletarProjeto);
     Rotas.post('/admin/deletar/projeto/:idProjeto',middleware.verificarLogin,uploadImg.single('image'),adimController.postdeletarProjeto);
-
+    
     Rotas.get("*",siteController.paginaErro);
 
 }catch{
