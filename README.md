@@ -13,7 +13,7 @@
 ![HTML5]
 ![CSS3]
 ![javaScript]
-![nodeJs]
+
 
 <p align="center">
  <a href="#about">About</a> • 
