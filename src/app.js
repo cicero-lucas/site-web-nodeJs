@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname)));
 
 app.use(cors({
     origin: '*', 
-    methods: ['GET', 'POST'], 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type'] 
 }));
 
@@ -40,3 +40,6 @@ app.use(Rotas);
 templeteSite(app);
 
 app.listen(process.env.PORT || 3000)
+
+
+

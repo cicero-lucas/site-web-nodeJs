@@ -45,7 +45,7 @@ try{
     Rotas.get("*",siteController.paginaErro);
 
 }catch{
-    Rotas.get("*",siteController.paginaErro);
+    Rotas.get("*",siteController.paginaErro);z
 
 }
 
